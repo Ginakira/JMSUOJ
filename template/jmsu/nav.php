@@ -32,7 +32,7 @@ if ($OJ_ONLINE) {
               <span class="icon-bar"></span>
               -->
             </button>
-            <a class="navbar-brand" href="<?php echo $OJ_HOME ?>"><i class="icon-home"></i><?php echo $OJ_NAME ?></a>
+            <a class="navbar-brand" href="<?php echo $OJ_HOME ?>"><?php echo $OJ_NAME ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

@@ -34,7 +34,6 @@ if (isset($_GET['page'])) {
     if (!is_numeric($page) || $page < 0) {
         $page = '1';
     }
-
 }
 //end of remember page
 
@@ -52,7 +51,6 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     foreach ($result as $row) {
         $sub_arr[$row[0]] = true;
     }
-
 }
 
 $acc_arr = array();
@@ -67,7 +65,6 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     foreach ($result as $row) {
         $acc_arr[$row[0]] = true;
     }
-
 }
 
 if (isset($_GET['search']) && trim($_GET['search']) != "") {
@@ -75,15 +72,12 @@ if (isset($_GET['search']) && trim($_GET['search']) != "") {
     $filter_sql = " ( title like ? or source like ?)";
     $pstart = 0;
     $pend = 100;
-
 } else {
     $filter_sql = "  `problem_id`>='" . strval($pstart) . "' AND `problem_id`<'" . strval($pend) . "' ";
 }
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-
     $sql = "SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE $filter_sql ";
-
 } else {
     $now = strftime("%Y-%m-%d %H:%M", time());
     $sql = "SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` " .
@@ -97,7 +91,6 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
 		)
 
 	) "; ////    AND c.`defunct` =  'N'  即使私有结束后被隐藏了，它的题目依旧保留，以免泄露
-
 }
 $sql .= " ORDER BY `problem_id`";
 
@@ -113,7 +106,6 @@ $cnt = 0;
 $view_problemset = array();
 $i = 0;
 foreach ($result as $row) {
-
     $view_problemset[$i] = array();
     if (isset($sub_arr[$row['problem_id']])) {
         if (isset($acc_arr[$row['problem_id']])) {
@@ -121,7 +113,6 @@ foreach ($result as $row) {
         } else {
             $view_problemset[$i][0] = "<div class='badge badge-pill badge-warning'>Unsolved</div>";
         }
-
     } else {
         $view_problemset[$i][0] = "<div class=none> </div>";
     }
@@ -135,7 +126,7 @@ foreach ($result as $row) {
     $view_problemset[$i][2] = "<div class='left'><a href='problem.php?id=" . $row['problem_id'] . "'>" . $row['title'] . "</a></div>";
     //3号 通过率显示进度条 使用bootstrap4样式
     $pass_percent = round($row['accepted'] / ($row['accepted'] + $row['submit']) * 100);
-    $view_problemset[$i][3] = "<div class='progress' style='margin:0 10px 0 10px;height:20px'><div class='progress-bar bg-info' style='width:" . $pass_percent . "%'>" . $pass_percent . "%</div></div>";
+    $view_problemset[$i][3] = "<div class='progress' style='margin:0 10px 0 10px;height:20px'><div class='progress-bar bg-primary' style='width:" . $pass_percent . "%'>" . $pass_percent . "%</div></div>";
     $view_problemset[$i][4] = "<div pid='" . $row['problem_id'] . "' fd='source' class='center'>";
     foreach ($category as $cat) {
         if (trim($cat) == "") {

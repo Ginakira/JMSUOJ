@@ -163,7 +163,7 @@ public class Main{
 <br>
 <hr>
 <center>
-  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统进行提问</a></font>
+  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统</a>进行提问</font>
 </center>
 <hr>
 <center>
