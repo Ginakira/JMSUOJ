@@ -59,18 +59,18 @@
     </td>
   </tr>
 </table>
-<p>  编译器版本为（系统可能升级编译器版本，这里仅供参考）:<br>
-  <font color=blue>gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3)</font><br>
+<p>  编译器版本为（截止至2020.02.06）:<br>
+  <font color=blue>gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12)</font><br>
   <font color=blue>glibc 2.19</font><br>
-<font color=blue>Free Pascal Compiler version 2.6.2<br>
-openjdk 1.7.0_151<br>
+<font color=blue>Free Pascal Compiler version 3.0.0+dfsg-2<br>
+openjdk 1.8.0_222<br>
 </font></p>
 <hr>
 <p><font color=green>Q</font>:程序怎样取得输入、进行输出?<br>
   <font color=red>A</font>:你的程序应该从标准输入 stdin('Standard Input')获取输入，并将结果输出到标准输出 stdout('Standard Output').例如,在C语言可以使用 'scanf' ，在C++可以使用'cin' 进行输入；在C使用 'printf' ，在C++使用'cout'进行输出.</p>
 <p>用户程序不允许直接读写文件, 如果这样做可能会判为运行时错误 "<font color=green>Runtime Error</font>"。<br>
   <br>
-下面是 1000题的参考答案</p>
+下面是 "A+B"题的参考答案</p>
 <p> C++:<br>
 </p>
 <pre><font color="blue">
@@ -170,8 +170,7 @@ public class Main{
   <table width=100% border=0>
     <tr>
       <td align=right width=65%>
-      <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "https://github.com/zhblue/hustoj"><font color=red>17.12.01</font></a></td>
+      <a href = "https://github.com/Ginakira/JMSUOJ"><font color=red><?php echo $OJ_NAME?> Update Time:20200206</font></a></td>
     </tr>
   </table>
 </center>

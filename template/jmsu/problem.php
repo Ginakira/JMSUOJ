@@ -57,7 +57,6 @@ if (isset($OJ_OI_MODE) && $OJ_OI_MODE) {
     if ($OJ_BBS) {
         echo "<a class='btn btn-dark btn-sm' href='bbs.php?pid=" . $row['problem_id'] . "$ucid'><i class='fas fa-comment-alt'></i> $MSG_BBS</a> ";
     }
-
 }
 
 if ($pr_flag) {
@@ -70,8 +69,7 @@ if ($pr_flag) {
 //echo "<span class='badge badge-secondary'>$MSG_Creator:<span id='creator'></span></span>";
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-    require_once "include/set_get_key.php";
-    ?>
+    require_once "include/set_get_key.php"; ?>
 
 				<a class="btn btn-primary btn-sm" href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i class='fas fa-edit'></i> 编辑</a>
 				<a class="btn btn-secondary btn-sm" href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i class='fas fa-database'></i> 测试数据</a>
@@ -190,20 +188,20 @@ $cats = explode(" ", $row['source']);
 				<div class='card-footer'>
 					<?php
 if ($pr_flag) {
-    echo "<a class='btn btn-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-} else {
-    echo "<a class='btn btn-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-}
+        echo "<a class='btn btn-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+    } else {
+        echo "<a class='btn btn-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+    }
 echo "<a class='btn btn-info btn-sm' href='problemstatus.php?id=" . $row['problem_id'] . "'><i class='fas fa-chart-bar'></i> $MSG_STATUS</a> ";
 //echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-    require_once "include/set_get_key.php";
-    ?>
+    require_once "include/set_get_key.php"; ?>
 
 <a class="btn btn-primary btn-sm" href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i class='fas fa-edit'></i> 编辑</a>
 				<a class="btn btn-secondary btn-sm" href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i class='fas fa-database'></i> 测试数据</a>
-					<?php }?>
+					<?php
+}?>
 				</div>
 			</center>
 		</div>

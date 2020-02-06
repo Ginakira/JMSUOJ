@@ -5,10 +5,12 @@
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>bootstrap4.min.js"></script>
 
 <?php
-if(file_exists("./admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
-if(file_exists("../admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
+if (file_exists("./admin/msg.txt")) {
+    $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
+}
+if (file_exists("../admin/msg.txt")) {
+    $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
+}
 
 
 ?>
@@ -32,11 +34,13 @@ $(document).ready(function(){
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
   $("body").append("<div class=center > <img src='../../image/logo-jmsu.png' width='250px'></div>");
   //$("body").append("<div class=center > Copyright © " + (new Date()).getFullYear() + " AutoWA Team. All Rights Reserved.</div>");
-  $("body").append("<footer class='text-center text-muted py-4 small'> 开发/维护：AutoWA Team &ensp;基于开源项目HUSTOJ<br>\
+  $("body").append("<footer class='text-center text-muted py-4 small'> 开发/维护：<a href='https://github.com/Ginakira/JMSUOJ'>AutoWA Team</a> &ensp;基于开源项目HUSTOJ<br>\
             Copyright © 2019-" + (new Date()).getFullYear() + " AutoWA Team All Rights Reserved. 备案号：<a href='http://www.beian.miit.gov.cn/'>黑ICP备19006251号-1</a> \
         </footer>")
-  <?php 
-	if(isset($_SESSION[$OJ_NAME."_administrator"])) echo "admin_mod();";
+  <?php
+    if (isset($_SESSION[$OJ_NAME."_administrator"])) {
+        echo "admin_mod();";
+    }
   ?>
 });
 
