@@ -129,7 +129,7 @@ public class Main{
   <li><font color=blue>main</font> 函数必须返回<font color=blue>int</font>, <font color=blue>void main</font> 的函数声明会报编译错误。<br> 
   <li><font color=green>i</font> 在循环外失去定义 "<font color=blue>for</font>(<font color=blue>int</font> <font color=green>i</font>=0...){...}"<br>
   <li><font color=green>itoa</font> 不是ansi标准函数.<br>
-  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>如果用了__int64,试试提交前加一句#define __int64 long long, scanf和printf 请使用%lld作为格式
+  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>如果用了__int64,可尝试提交前加一句#define __int64 long long, scanf和printf 请使用%lld作为格式
 </ul>
 <hr>
 <font color=green>Q</font>:系统返回信息都是什么意思?<br>
