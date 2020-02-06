@@ -59,7 +59,7 @@
     </td>
   </tr>
 </table>
-<p>  编译器版本为（截止至2020.02.06）:<br>
+<p>  编译器版本为（截至2020.02.06）:<br>
   <font color=blue>gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.12)</font><br>
   <font color=blue>glibc 2.19</font><br>
 <font color=blue>Free Pascal Compiler version 3.0.0+dfsg-2<br>
@@ -163,7 +163,7 @@ public class Main{
 <br>
 <hr>
 <center>
-  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统</a></font>
+  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统进行提问</a></font>
 </center>
 <hr>
 <center>
