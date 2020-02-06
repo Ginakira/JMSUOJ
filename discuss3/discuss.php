@@ -19,27 +19,27 @@ require_once "oj-header.php";
 echo "<title>HUST Online Judge WebBoard</title>";
 ?>
 <center>
-    <div style="width:90%">
+    <div style="width:98%">
         <?php
         if ($prob_exist) { ?>
             <div style="text-align:left;font-size:80%">
-                [ <a href="newpost.php<?php
+                <a class="btn btn-primary" href="newpost.php<?php
                                         if ($pid != 0 && $cid != null) {
                                             echo "?pid=" . $pid . "&cid=" . $cid;
-                                        } else if ($pid != 0) {
+                                        } elseif ($pid != 0) {
                                             echo "?pid=" . $pid;
-                                        } else if ($cid != 0) {
+                                        } elseif ($cid != 0) {
                                             echo "?cid=" . $cid;
                                         }
                                         ?>
-		">New Thread</a> ]</div>
+		"><i class="fas fa-file"></i> 发布新帖</a></div>
             <div style="float:left;text-align:left;font-size:80%">
-                Location :
+                当前版块 :
                 <?php if ($cid != null) {
-                    echo "<a href=\"discuss.php?cid=" . $cid . "\">Contest " . $cid . "</a>";
-                } else {
-                    echo "<a href=\"discuss.php\">MainBoard</a>";
-                }
+                                            echo "<a href=\"discuss.php?cid=" . $cid . "\">Contest " . $cid . "</a>";
+                                        } else {
+                                            echo "<a href=\"discuss.php\">MainBoard</a>";
+                                        }
 
                 if ($pid != null && $pid != 0) {
                     $query = "?pid=$pid";
@@ -94,27 +94,26 @@ echo "<title>HUST Online Judge WebBoard</title>";
         $cnt = 0;
         $isadmin = isset($_SESSION[$OJ_NAME . '_' . 'administrator']);
         ?>
-        <table style="clear:both; width:100%">
+        <table class="table table-stripped" style="clear:both; width:100%">
             <tr align=center class='toprow'>
                 <td width="2%"><?php if ($isadmin) {
-                                    echo "<input type=checkbox>";
-                                }
+            echo "<input type=checkbox>";
+        }
                                 ?></td>
                 <td width="3%"></td>
-                <td width="4%">Prob</td>
-                <td width="12%">Author</td>
-                <td width="46%">Title</td>
-                <td width="8%">Post Date</td>
-                <td width="16%">Last Reply</td>
-                <td width="3%">Re</td>
+                <td width="4%">题号</td>
+                <td width="12%">发布者</td>
+                <td width="44%">标题</td>
+                <td width="10%">发帖时间</td>
+                <td width="16%">最后回复</td>
+                <td width="3%">回复</td>
             </tr>
             <?php if ($rows_cnt == 0) {
-                echo ("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">No thread here.</td></tr>");
-            }
+                                    echo("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">还没人发帖哦～</td></tr>");
+                                }
 
             $i = 0;
             foreach ($result as $row) {
-
                 if ($cnt) {
                     echo "<tr align=center class='oddrow'>";
                 } else {
@@ -125,18 +124,18 @@ echo "<title>HUST Online Judge WebBoard</title>";
                 if ($isadmin) {
                     echo "<td><input type=checkbox></td>";
                 } else {
-                    echo ("<td></td>");
+                    echo("<td></td>");
                 }
 
                 echo "<td>";
                 if ($row['top_level'] != 0) {
                     if ($row['top_level'] != 1 || $row['pid'] == ($pid == '' ? 0 : $pid)) {
-                        echo "<b class=\"Top{$row['top_level']}\">Top</b>";
+                        echo "<b class=\"Top{$row['top_level']} text-info\">Top</b>";
                     }
-                } else if ($row['status'] == 1) {
-                    echo "<b class=\"Lock\">Lock</b>";
-                } else if ($row['count'] > 20) {
-                    echo "<b class=\"Hot\">Hot</b>";
+                } elseif ($row['status'] == 1) {
+                    echo "<b class=\"Lock text-secondary\">Lock</b>";
+                } elseif ($row['count'] > 20) {
+                    echo "<b class=\"Hot\" text-danger>Hot</b>";
                 }
 
                 echo "</td>";
@@ -158,8 +157,8 @@ echo "<title>HUST Online Judge WebBoard</title>";
                     echo "<td><a href=\"thread.php?tid={$row['tid']}\">" . htmlentities($row['title'], ENT_QUOTES, "UTF-8") . "</a></td>";
                 }
 
-                echo "<td>{$row['posttime']}</td>";
-                echo "<td>{$row['lastupdate']}</td>";
+                echo "<td class='small'>{$row['posttime']}</td>";
+                echo "<td class='small'>{$row['lastupdate']}</td>";
                 echo "<td>" . ($row['count'] - 1) . "</td>";
                 echo "</tr>";
                 $i++;
