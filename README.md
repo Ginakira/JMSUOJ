@@ -1,5 +1,5 @@
 # JMSU OnlineJudge
-![version](https://img.shields.io/github/v/tag/Ginakira/JMSUOJ?color=green&label=Version&style=for-the-badge)
+![version](https://img.shields.io/github/v/tag/Ginakira/JMSUOJ?color=blue&label=Version&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/Ginakira/JMSUOJ?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ginakira/JMSUOJ?style=for-the-badge)
 
@@ -7,4 +7,4 @@
 
 基于[HUSTOJ](https://github.com/zhblue/hustoj/)开发
 
-项目维护：AutoWA Team - Ginakira / Player / fangsong0517
+项目维护：AutoWA Team - [Ginakira](https://github.com/Ginakira) / [Player](https://github.com/wangjianduo) / [fangsong0517](https://github.com/fangsong0517)
