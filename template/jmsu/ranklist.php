@@ -29,13 +29,13 @@
 <thead>
 <tr><td colspan=3 align=left>
 <form class="form-inline" action="ranklist.php">
-<?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>" >
+<?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"", ENT_QUOTES, "utf-8") ?>" >
 <input type=submit class="form-control" value=Search >
 </form></td><td colspan=3 align=right>
-<a href=ranklist.php?scope=d>Day</a>
-<a href=ranklist.php?scope=w>Week</a>
-<a href=ranklist.php?scope=m>Month</a>
-<a href=ranklist.php?scope=y>Year</a>
+<a href=ranklist.php?scope=d>日排名</a>
+<a href=ranklist.php?scope=w>周排名</a>
+<a href=ranklist.php?scope=m>月排名</a>
+<a href=ranklist.php?scope=y>年排名</a>
 </td></tr>
 <tr class='toprow'>
 <td width=5% align=center><b><?php echo $MSG_Number?></b>
@@ -49,18 +49,19 @@
 <tbody>
 <?php
 $cnt=0;
-foreach($view_rank as $row){
-if ($cnt)
-echo "<tr class='oddrow'>";
-else
-echo "<tr class='evenrow'>";
-foreach($row as $table_cell){
-echo "<td>";
-echo "\t".$table_cell;
-echo "</td>";
-}
-echo "</tr>";
-$cnt=1-$cnt;
+foreach ($view_rank as $row) {
+    if ($cnt) {
+        echo "<tr class='oddrow'>";
+    } else {
+        echo "<tr class='evenrow'>";
+    }
+    foreach ($row as $table_cell) {
+        echo "<td>";
+        echo "\t".$table_cell;
+        echo "</td>";
+    }
+    echo "</tr>";
+    $cnt=1-$cnt;
 }
 ?>
 </tbody>
@@ -68,20 +69,21 @@ $cnt=1-$cnt;
 <?php
 echo "<center>";
 $qs="";
-if(isset($_GET['prefix'])){
-	$qs.="&prefix=".htmlentities($_GET['prefix'],ENT_QUOTES,"utf-8");
+if (isset($_GET['prefix'])) {
+    $qs.="&prefix=".htmlentities($_GET['prefix'], ENT_QUOTES, "utf-8");
 }
-if(isset($scope)){
-	$qs.="&scope=".htmlentities($scope,ENT_QUOTES,"utf-8");
+if (isset($scope)) {
+    $qs.="&scope=".htmlentities($scope, ENT_QUOTES, "utf-8");
 }
-for($i = 0; $i <$view_total ; $i += $page_size) {
-	echo "<a href='./ranklist.php?start=" . strval ( $i ).$qs. "'>";
-	echo strval ( $i + 1 );
-	echo "-";
-	echo strval ( $i + $page_size );
-	echo "</a>&nbsp;";
-	if ($i % 250 == 200)
-		echo "<br>";
+for ($i = 0; $i <$view_total ; $i += $page_size) {
+    echo "<a href='./ranklist.php?start=" . strval($i).$qs. "'>";
+    echo strval($i + 1);
+    echo "-";
+    echo strval($i + $page_size);
+    echo "</a>&nbsp;";
+    if ($i % 250 == 200) {
+        echo "<br>";
+    }
 }
 echo "</center>";
 ?>
