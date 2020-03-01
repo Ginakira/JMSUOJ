@@ -92,8 +92,9 @@ $lastlang=0;
 if (!$view_src) {
     if (isset($_COOKIE['lastlang'])) {
         $lastlang=intval($_COOKIE['lastlang']);
+        echo $_COOKIE['lastlang'];
     } else {
-        $lastlang=0;
+        $lastlang=1;
     }
     $template_file="$OJ_DATA/$problem_id/template.".$language_ext[$lastlang];
     if (file_exists($template_file)) {
