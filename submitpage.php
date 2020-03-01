@@ -92,7 +92,6 @@ $lastlang=0;
 if (!$view_src) {
     if (isset($_COOKIE['lastlang'])) {
         $lastlang=intval($_COOKIE['lastlang']);
-        echo $_COOKIE['lastlang'];
     } else {
         $lastlang=1;
     }
