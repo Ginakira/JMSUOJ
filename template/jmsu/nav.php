@@ -51,7 +51,7 @@ if ($OJ_ONLINE) {
                         <li class="nav-item <?php if ($dir == "discuss3") {
                         echo " $ACTIVE";
                     }
-                                            ?>"><a class="nav-link" href="<?php echo $path_fix ?>bbs.php<?php echo "?cid=" . intval($OJ_ON_SITE_CONTEST_ID); ?>">
+                                            ?>"><a class="nav-link" href="https://bbs.jmsu.xyz/">
                                 <i class="fas fa-comment-alt"></i> <?php echo $MSG_BBS ?></a>
                         </li>
                 <?php }
