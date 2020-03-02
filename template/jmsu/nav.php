@@ -44,10 +44,7 @@ if ($OJ_ONLINE) {
     echo " $ACTIVE";
 }
                                             ?>">
-                            <a class="nav-link" href="<?php echo $path_fix ?>bbs.php<?php if (isset($_GET['cid'])) {
-                                                echo "?cid=" . intval($_GET['cid']);
-                                            }
-                                                                                    ?>"><i class="fas fa-comment-alt"></i> <?php echo $MSG_BBS ?></a></li>
+                            <a class="nav-link" href="https://bbs.jmsu.xyz/"><i class="fas fa-comment-alt"></i> <?php echo $MSG_BBS ?></a></li>
                     <?php }
                 } else {
                     if ($OJ_BBS) { ?>
