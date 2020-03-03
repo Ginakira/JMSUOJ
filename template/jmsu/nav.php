@@ -153,5 +153,5 @@ if ($OJ_ONLINE) {
     <!--/.container-fluid -->
 </nav>
 <div class="alert alert-danger alert-dismissible fade show text-center">
-    JMSU OnlineJudge提醒您：<b>勤洗手 不聚众 开窗通风 正确佩戴口罩 注意个人卫生</b>
+    JMSU OnlineJudge提醒您：<b>勤洗手 不聚众 开窗通风 正确佩戴口罩 注意个人卫生</b>  论坛开放注册中！ <a href="https://bbs.jmsu.xyz/">点击访问</a>
 </div>
