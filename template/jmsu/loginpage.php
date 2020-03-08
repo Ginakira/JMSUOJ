@@ -23,7 +23,7 @@
     <div class="container">
       <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="col-6 m-auto bg-light" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;border-radius:20px">
+      <div class="col-6 m-auto bg-light rounded" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;">
         <form id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();"  >
           <div class="form-group">
             <label class="control-label"><?php echo $MSG_USER_ID?></label>
