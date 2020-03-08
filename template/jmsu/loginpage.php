@@ -23,35 +23,33 @@
     <div class="container">
       <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <div class="col-4 m-auto">
-          <form id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();"  >
+      <div class="col-6 m-auto bg-light" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;border-radius:20px">
+        <form id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();"  >
+          <div class="form-group">
+            <label class="control-label"><?php echo $MSG_USER_ID?></label>
+            <input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label"><?php echo $MSG_PASSWORD?></label>
+            <input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>" type="password">
+          </div>
+          <?php if ($OJ_VCODE) {?>
             <div class="form-group">
-              <label class="control-label"><?php echo $MSG_USER_ID?></label>
-              <input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>" type="text">
+              <label class="control-label"><?php echo $MSG_VCODE?></label>
+              <input name="vcode" class="form-control" type="text">
+              <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()" height="30px">*
             </div>
-            <div class="form-group">
-              <label class="control-label"><?php echo $MSG_PASSWORD?></label>
-              <input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>" type="password">
+          <?php }?>
+          <div class="form-group row">
+            <div class="col-lg-6">
+              <button name="submit" type="submit" class="btn btn-primary btn-block" style="margin-bottom: 15px"><?php echo $MSG_LOGIN; ?></button>
             </div>
-            <?php if ($OJ_VCODE) {?>
-              <div class="form-group">
-                <label class="control-label"><?php echo $MSG_VCODE?></label>
-                <input name="vcode" class="form-control" type="text">
-                <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()" height="30px">*
-              </div>
-            <?php }?>
-            <div class="form-group row">
-              <div class="col-lg-6">
-                <button name="submit" type="submit" class="btn btn-primary btn-block" style="margin-bottom:15px;"><?php echo $MSG_LOGIN; ?></button>
-              </div>
-              <div class="col-lg-6">
-                <a class="btn btn-secondary btn-block" href="lostpassword.php"><?php echo $MSG_LOST_PASSWORD; ?></a>
-              </div>
+            <div class="col-lg-6">
+              <a class="btn btn-secondary btn-block" href="lostpassword.php"><?php echo $MSG_LOST_PASSWORD; ?></a>
             </div>
-          </form>	
-        </div>			
-      </div>
+          </div>
+        </form>	
+      </div>			
       <script src="<?php echo $OJ_CDN_URL?>include/md5-min.js"></script>
       <script>
         function jsMd5(){
