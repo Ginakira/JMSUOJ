@@ -24,55 +24,51 @@
   <div class="container">
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="col-sm-6 m-auto bg-light rounded" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;">
 
       <form action="register.php" method="post" role="form" class="form-horizontal">
         
         <div class="form-group">
-          <h4 class="col-sm-4 control-label"><?php echo $MSG_REG_INFO?></label>
+          <h4 class="control-label text-center"><?php echo $MSG_REG_INFO?></label>
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label>
-          <div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text"></div>
+          <label class="control-label"><?php echo $MSG_USER_ID?></label>
+          <input name="user_id" class="form-control" placeholder="必填 建议使用学号（3～20个数字/字母）" type="text">
         </div>
           <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_NICK?></label>
-          <div class="col-sm-4"><input name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text"></div>
+          <label class="control-label"><?php echo $MSG_NICK?></label>
+          <input name="nick" class="form-control" placeholder="留空默认与ID相同 （1～100个字符）" type="text">
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label>
-          <div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"></div>
+          <label class="control-label"><?php echo $MSG_PASSWORD?></label>
+          <input name="password" class="form-control" placeholder="必填 至少六位" type="password">
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_REPEAT_PASSWORD?></label>
-          <div class="col-sm-4"><input name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"></div>
+          <label class="control-label"><?php echo $MSG_REPEAT_PASSWORD?></label>
+          <input name="rptpassword" class="form-control" placeholder="必填" type="password">
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_SCHOOL?>（非必填）</label>
-          <div class="col-sm-4"><input name="school" class="form-control" placeholder="<?php echo $MSG_SCHOOL?>" type="text"></div>
+          <label class="control-label"><?php echo $MSG_SCHOOL?></label>
+          <input name="school" class="form-control" placeholder="非必填" type="text">
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_EMAIL?>（非必填）</label>
-          <div class="col-sm-4"><input name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"></div>
+          <label class="control-label"><?php echo $MSG_EMAIL?></label>
+          <input name="email" class="form-control" placeholder="必填" type="text">
         </div>
 
-        <?php if($OJ_VCODE){?>
+        <?php if ($OJ_VCODE) {?>
         <div class="form-group">
-          <label class="col-sm-4 control-label"><?php echo $MSG_VCODE?></label>
-          <div class="col-sm-3">
-            <input name="vcode" class="form-control" placeholder="<?php echo $MSG_VCODE?>*" type="text">
-          </div>
-          <div class="col-sm-4">
-            <img alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="30px">*
-          </div>
+          <label class="control-label"><?php echo $MSG_VCODE?></label>
+          <input name="vcode" class="form-control" placeholder="<?php echo $MSG_VCODE?>*" type="text">
+          <img alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="30px">*
         </div>
         <?php }?>
 
-        <div class="form-group row m-auto">
-          <div class="col-sm-2">
-            <button name="submit" type="submit" class="btn btn-primary btn-block"><?php echo $MSG_REGISTER; ?></button>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <button name="submit" type="submit" class="btn btn-primary btn-block" style="margin-bottom: 15px"><?php echo $MSG_REGISTER; ?></button>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-6">
             <button name="submit" type="reset" class="btn btn-secondary btn-block"><?php echo $MSG_RESET; ?></button>
           </div>
         </div>
