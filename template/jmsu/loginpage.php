@@ -23,7 +23,7 @@
     <div class="container">
       <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="col-6 m-auto bg-light rounded" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;">
+      <div class="col-sm-6 m-auto bg-light rounded" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;">
         <form id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();"  >
           <div class="form-group">
             <label class="control-label"><?php echo $MSG_USER_ID?></label>
@@ -41,10 +41,10 @@
             </div>
           <?php }?>
           <div class="form-group row">
-            <div class="col-lg-6">
+            <div class="col-sm-6">
               <button name="submit" type="submit" class="btn btn-primary btn-block" style="margin-bottom: 15px"><?php echo $MSG_LOGIN; ?></button>
             </div>
-            <div class="col-lg-6">
+            <div class="col-sm-6">
               <a class="btn btn-secondary btn-block" href="lostpassword.php"><?php echo $MSG_LOST_PASSWORD; ?></a>
             </div>
           </div>
