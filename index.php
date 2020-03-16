@@ -28,15 +28,11 @@ if (!$result) {
     $view_news = "<h3>暂无公告!</h3>";
 } else {
     $view_news .= "<div class='card' style='width:80%;margin:0 auto;'>";
-    //$view_news .= "<div class='panel-heading'><h3>" . $MSG_NEWS . "<h3></div>";
-    //$view_news .= "<div class='panel-body'>";
     $cnt_id = 1; //用于模态框id记录
     foreach ($result as $row) {
-        //$view_news .= "<div class='card' style='margin-bottom:15px;'>";
-        //$view_news .= "<div class='card-header'><big>" . $row['title'] . "</big>-<small>" . $row['user_id'] . "</small></div>";
-        //$view_news .= "<div class='card-body'>" . $row['content'] . "</div>";
-        //$view_news .= "</div>";
-        $news_list .= "<tr><td><a href='#' data-toggle='modal' data-target='#news" . $cnt_id . "'>" . $row['title'] . "</a></td><td>" . $row['time'] . "</td><td>" . $row['user_id'] . "</td></tr>";
+        $news_list .= "<tr><td><a href='#' data-toggle='modal' data-target='#news" . $cnt_id . "'>" . $row['title'] . "</a></td>" .
+                    "<td class='small'>" . $row['time'] . "</td>" .
+                    "<td><span class='badge badge-secondary'>" . $row['user_id'] . "</span></td></tr>";
         $news_modals .= "<div class='modal fade' id='news" . $cnt_id . "'>"; //模态框id
         //模态框头部&标题
         $news_modals .= "<div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>" . $row['title'] . "</h4>-<small>" . $row['user_id'] . "</small><button type='button' class='close' data-dismiss='modal'>&times;</button></div>";
@@ -46,9 +42,6 @@ if (!$result) {
         $news_modals .= "<div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>关闭</button></div></div></div></div>";
         $cnt_id++;
     }
-    //$view_news .= "</div>";
-    //$view_news .= "<div class='panel-footer'>请到<a target='_blank' href='https://github.com/zhblue/hustoj'> GitHub</a>来，给我们加个星星！&nbsp;Please give us a star on <a target='_blank' href='https://github.com/zhblue/hustoj'>Github</a>!</div>";
-    //$view_news .= "</div>";
 }
 $view_apc_info = "";
 
@@ -72,10 +65,10 @@ foreach ($result as $row) {
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     $sql = "select avg(sp) sp from (select  avg(1) sp,judgetime from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 60 * 60) order by sp) tt;";
     $result = mysql_query_cache($sql);
-    $speed = ($result[0][0] ? $result[0][0] : 0) . '/min';
+    $speed = ($result[0][0] ? $result[0][0] : 0) . '/分钟';
 } else {
     if (isset($chart_data_all[0][1])) {
-        $speed = ($chart_data_all[0][1] ? $chart_data_all[0][1] : 0) . '/day';
+        $speed = ($chart_data_all[0][1] ? $chart_data_all[0][1] : 0) . '/天';
     }
 }
 

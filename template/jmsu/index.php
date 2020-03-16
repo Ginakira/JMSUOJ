@@ -30,17 +30,20 @@
 			<!-- 提交数统计图表-->
 			<p>
 				<center> 最近提交 :
-					<?php echo $speed ?> .
+					<?php echo $speed ?>
 					<div id=submission style="width:80%;height:300px"></div>
 				</center>
 			</p>
 			<!--2020-01-20重写 公告以列表形式 + bs4模态框展现-->
 			<div class="card" style="width:80%;margin:0 auto">
+				<div class="card-header">公告</div>
 				<div class="card-body">
 					<table class="table table-responsive">
-						<thead>
-							<tr><th style="width:60%">公告</th><th class="width:20%"></th><th class="width:20%"></th></tr>
-						</thead>
+						<colgroup>
+							<col style="width:55%">
+							<col style="width:35%">
+							<col style="width:10%">
+						</colgroup>
 						<tbody>
 							<?php echo $news_list; ?>
 						</tbody>
