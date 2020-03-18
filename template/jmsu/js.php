@@ -1,5 +1,5 @@
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>jquery.min.js"></script>
-<script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>bootstrap4.min.js"></script>
+<script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/bootstrap/js/" ?>bootstrap.min.js"></script>
 
 <?php
 if (file_exists("./admin/msg.txt")) {
@@ -31,7 +31,7 @@ or
         $("form").append("<div id='csrf' />");
         $("#csrf").load("<?php echo $path_fix?>csrf.php");
         $("body").append("\
-            <div class=center > <img src='../../image/logo-jmsu.png' width='254' alt='JMSU-ACM logo'></div>\
+            <div class=center> <img src='../../image/logo-jmsu.png' width='254' alt='JMSU-ACM logo'></div>\
             <footer class='text-center text-muted py-4 small'>\
             开发/维护：<a href='https://github.com/Ginakira/JMSUOJ'>AutoWA Team</a> &ensp;基于开源项目HUSTOJ<br>\
             Copyright © 2019-" + (new Date()).getFullYear() + " AutoWA Team All Rights Reserved.<br>\
@@ -43,7 +43,7 @@ or
         }
         ?>
     });
-    
+
     $(".hint pre").each(function () {
         let plus = "<span class='glyphicon glyphicon-plus'>Click</span>";
         let content = $(this);
@@ -53,9 +53,6 @@ or
         });
 
     });
-
-    console.log("If you want to change the appearance of the web pages, make a copy of bs3 under template directory.\nRename it to whatever you like, and change the $OJ_TEMPLATE value in db_info.inc.php\nAfter that modify files under your own directory .\n");
-    console.log("To enable mathjax in hustoj, check line 15 in /home/judge/src/web/template/bs3/js.php");
 
     function admin_mod() {
         $("div[fd=source]").each(function () {
