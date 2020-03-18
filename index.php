@@ -31,8 +31,8 @@ if (!$result) {
     $cnt_id = 1; //用于模态框id记录
     foreach ($result as $row) {
         $news_list .= "<tr><td><a href='#' data-toggle='modal' data-target='#news" . $cnt_id . "'>" . $row['title'] . "</a></td>" .
-                    "<td class='small'>" . $row['time'] . "</td>" .
-                    "<td><span class='badge badge-secondary'>" . $row['user_id'] . "</span></td></tr>";
+            "<td class='small'>" . $row['time'] . "</td>" .
+            "<td><span class='badge badge-secondary'>" . $row['user_id'] . "</span></td></tr>";
         $news_modals .= "<div class='modal fade' id='news" . $cnt_id . "'>"; //模态框id
         //模态框头部&标题
         $news_modals .= "<div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>" . $row['title'] . "</h4>-<small>" . $row['user_id'] . "</small><button type='button' class='close' data-dismiss='modal'>&times;</button></div>";
@@ -62,6 +62,8 @@ $chart_data_ac = array();
 foreach ($result as $row) {
     array_push($chart_data_ac, array($row['md'], $row['c']));
 }
+
+$speed = 0;
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     $sql = "select avg(sp) sp from (select  avg(1) sp,judgetime from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 60 * 60) order by sp) tt;";
     $result = mysql_query_cache($sql);
@@ -73,7 +75,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
 }
 
 /////////////////////////Template
-require "template/" . $OJ_TEMPLATE . "/index.php";
+require "template/$OJ_TEMPLATE/index.php";
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';
