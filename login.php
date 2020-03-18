@@ -2,10 +2,10 @@
 require_once("./include/db_info.inc.php");
 require_once('./include/setlang.php');
 $vcode = "";
-if (isset($_POST[ 'vcode' ])) {
-    $vcode = trim($_POST[ 'vcode' ]);
+if (isset($_POST['vcode'])) {
+    $vcode = trim($_POST['vcode']);
 }
-if ($OJ_VCODE && ($vcode != $_SESSION[ $OJ_NAME . '_' . "vcode" ] || $vcode == "" || $vcode == null)) {
+if ($OJ_VCODE && ($vcode != $_SESSION[$OJ_NAME . '_' . "vcode"] || $vcode == "" || $vcode == null)) {
     echo "<script language='javascript'>\n";
     echo "alert('验证码错误!');\n";
     echo "history.go(-1);\n";
@@ -13,9 +13,9 @@ if ($OJ_VCODE && ($vcode != $_SESSION[ $OJ_NAME . '_' . "vcode" ] || $vcode == "
     exit(0);
 }
 $view_errors = "";
-require_once("./include/login-" . $OJ_LOGIN_MOD . ".php");
-$user_id = $_POST[ 'user_id' ];
-$password = $_POST[ 'password' ];
+require_once("./include/login-$OJ_LOGIN_MOD.php");
+$user_id = $_POST['user_id'];
+$password = $_POST['password'];
 if (get_magic_quotes_gpc()) {
     $user_id = stripslashes($user_id);
     $password = stripslashes($password);
@@ -23,13 +23,13 @@ if (get_magic_quotes_gpc()) {
 $sql = "SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 $login = check_login($user_id, $password);
 if ($login) {
-    $_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
+    $_SESSION[$OJ_NAME . '_' . 'user_id'] = $login;
     $result = pdo_query($sql, $login);
 
     foreach ($result as $row) {
-        $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
+        $_SESSION[$OJ_NAME . '_' . $row['rightstr']] = true;
     }
-    $sql="update users set accesstime=now() where user_id=?";
+    $sql = "update users set accesstime=now() where user_id=?";
     $result = pdo_query($sql, $login);
 
     echo "<script language='javascript'>\n";
@@ -41,7 +41,7 @@ if ($login) {
     echo "</script>";
 } else {
     if ($view_errors) {
-        require("template/" . $OJ_TEMPLATE . "/error.php");
+        require("template/$OJ_TEMPLATE/error.php");
     } else {
         echo "<script language='javascript'>\n";
         echo "alert('用户名或密码错误!');\n";
