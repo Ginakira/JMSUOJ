@@ -16,7 +16,7 @@ function is_valid($str2)
 {
     global $_SESSION, $OJ_NAME;
     if (isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) || isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-        //2020.01.20修改逻辑 管理员与源代码审查者均有查看REINFO权限
+        //2020.01.20修改逻辑 管理员与源代码审查者均有查看RE_INFO权限
         return true;
     }
 
@@ -40,12 +40,25 @@ $row = $result[0];
 $lang = $row['language'];
 $contest_id = intval($row['contest_id']);
 $isRE = $row['result'] == 10;
+
+// 用于具体评测信息页的顶部表格展示
+$solution_info = array(
+    "sid" => $row['solution_id'],
+    "pid" => $row['problem_id'],
+    "uid" => $row['user_id'],
+    "time" => $row['time'],
+    "memory" => $row['memory'],
+    "length" => $row['code_length'],
+    "score" => $row['pass_rate'] * 100,
+    "date" => $row['judgetime']
+);
+
 if ($row && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) {
     $ok = true;
 }
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) || isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-    //2020.01.20修改逻辑 管理员与源代码审查者均有查看REINFO权限
+    //2020.01.20修改逻辑 管理员与源代码审查者均有查看RE_INFO权限
     $ok = true;
 }
 
@@ -77,12 +90,12 @@ if (
 } else {
 
     $view_errors = "抱歉，您没有权限查看此信息!";
-    require "template/" . $OJ_TEMPLATE . "/error.php";
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
 /////////////////////////Template
-require "template/" . $OJ_TEMPLATE . "/reinfo.php";
+require "template/$OJ_TEMPLATE/reinfo.php";
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';
