@@ -217,8 +217,8 @@ for ($i = 0; $i < $rows_cnt; $i++) {
 
     $bottom = $row['solution_id'];
     $flag = (!is_running(intval($row['contest_id']))) ||
-    isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) ||
-    isset($_SESSION[$OJ_NAME . '_' . 'administrator']) ||
+        isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) ||
+        isset($_SESSION[$OJ_NAME . '_' . 'administrator']) ||
         (isset($_SESSION[$OJ_NAME . '_' . 'user_id']) && !strcmp($row['user_id'], $_SESSION[$OJ_NAME . '_' . 'user_id']));
 
     $cnt = 1 - $cnt;
@@ -278,7 +278,8 @@ for ($i = 0; $i < $rows_cnt; $i++) {
         case 11:
             $MSG_Tips = $MSG_HELP_CE;
             break;
-        default:$MSG_Tips = "";
+        default:
+            $MSG_Tips = "";
 
     }
     if (isset($OJ_MARK) && $OJ_MARK == "mark") {
