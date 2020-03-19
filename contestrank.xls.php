@@ -143,7 +143,7 @@ if ($rows_cnt > 0) {
     $title = $row[1];
     $end_time = strtotime($row[2]);
 
-    //$ftitle = rawurlencode($title);
+    // 文件名非字母字符转义 $ftitle = rawurlencode($title);
     header("content-disposition:   attachment;   filename=contest" . $cid . "_" . $title . ".xls");
 }
 
@@ -154,7 +154,7 @@ if ($start_time == 0) {
 }
 
 if ($start_time > time()) {
-    echo "Contest Not Started!";
+    echo "比赛还未开始!";
     //require_once("oj-footer.php");
     exit(0);
 }
@@ -209,16 +209,16 @@ usort($U, "s_cmp");
 $rank = 1;
 //echo "<style> td{font-size:14} </style>";
 //echo "<title>Contest RankList -- $title</title>";
-echo "<center><h3>Contest RankList -- $title</h3></center>";
-echo "<table border=1><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
+echo "<div style='text-align: center;'><h3>竞赛排名 -- $title</h3></div>";
+echo "<table style='border: solid #0f0f0f 1px'><tr><td>排名<td>ID<td>昵称<td>通过题数<td>分数";
 for ($i = 0; $i < $pid_cnt; $i++)
     echo "<td>$PID[$i]";
 echo "</tr>";
 getMark($U, $mark_start, $mark_end, $mark_sigma);
 
 for ($i = 0; $i < $user_cnt; $i++) {
-    if ($i & 1) echo "<tr class=oddrow align=center>";
-    else echo "<tr class=evenrow align=center>";
+    if ($i & 1) echo "<tr class=oddrow style='text-align: center'>";
+    else echo "<tr class=evenrow style='text-align: center'>";
     // don't count rank while nick start with *
     if ($U[$i]->nick[0] == '*') {
         echo "<td>*";
