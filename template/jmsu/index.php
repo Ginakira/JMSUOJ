@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,39 +21,43 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<main role="main" class="flex-shrink-0">
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <!-- 提交数统计图表-->
-        <div class="m-auto" style="text-align: center;"> 最近提交 :
-            <?php echo $speed ?>
-            <div id=submission class="m-auto" style="width:80%;height:300px;text-align: center"></div>
+    <div class="container">
+        
+        <div class="col">
+            <!-- 提交数统计图表-->
+            <div class="m-auto" style="text-align: center;"> 最近提交 :
+                <?php echo $speed ?>
+                <div id=submission class="m-auto" style="width:80%;height:300px;text-align: center"></div>
+            </div>
+            <br>
         </div>
-        <br>
         <!--公告以列表形式 + bs4模态框展现-->
-        <div class="card" style="width:80%;margin:0 auto">
-            <div class="card-header">公告</div>
-            <div class="card-body">
-                <table class="table table-responsive">
-                    <colgroup>
-                        <col style="width:55%">
-                        <col style="width:35%">
-                        <col style="width:10%">
-                    </colgroup>
-                    <tbody>
-                    <?php echo $news_list; ?>
-                    </tbody>
-                </table>
+        <div class="col">
+            <div class="card" style="width:80%;margin:0 auto">
+                <div class="card-header">公告</div>
+                <div class="card-body">
+                    <table class="table table-responsive">
+                        <colgroup>
+                            <col style="width:55%">
+                            <col style="width:35%">
+                            <col style="width:10%">
+                        </colgroup>
+                        <tbody>
+                        <?php echo $news_list; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <!--输出模态框内容news_modals-->
-        <?php echo $news_modals ?>
     </div>
-
-</div>
+    <!--输出模态框内容news_modals-->
+    <?php echo $news_modals ?>
+</main>
 <!-- /container -->
 
 

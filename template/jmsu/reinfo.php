@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -20,10 +20,10 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
 <div class="container">
-    <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="alert alert-info alert-dismissible text-center fade show">

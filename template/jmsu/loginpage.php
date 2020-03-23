@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,9 +19,9 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
+<?php include("template/$OJ_TEMPLATE/nav.php"); ?>
 <div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php"); ?>
     <!-- Main component for a primary marketing message or call to action -->
     <div class="col-sm-6 m-auto bg-light rounded" style="padding:20px 50px 20px 50px;border: 1px solid #dcdcdc;">
         <form id="login" action="login.php" method="post" role="form" class="form-horizontal"

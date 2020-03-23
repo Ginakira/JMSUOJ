@@ -1,4 +1,4 @@
- <?php
+<?php
 if (isset($_POST['keyword'])) {
     $cache_time = 1;
 } else {
@@ -23,20 +23,39 @@ function formatTimeLength($length)
 
     if ($length >= 60) {
         $second = $length % 60;
-        if ($second > 0) {$result = $second . '秒';}
+        if ($second > 0) {
+            $result = $second . '秒';
+        }
         $length = floor($length / 60);
         if ($length >= 60) {
             $minute = $length % 60;
-            if ($minute == 0) {if ($result != '') {$result = '0分' . $result;}} else { $result = $minute . '分' . $result;}
+            if ($minute == 0) {
+                if ($result != '') {
+                    $result = '0分' . $result;
+                }
+            } else {
+                $result = $minute . '分' . $result;
+            }
             $length = floor($length / 60);
             if ($length >= 24) {
                 $hour = $length % 24;
-                if ($hour == 0) {if ($result != '') {$result = '0小时' . $result;}} else { $result = $hour . '小时' . $result;}
+                if ($hour == 0) {
+                    if ($result != '') {
+                        $result = '0小时' . $result;
+                    }
+                } else {
+                    $result = $hour . '小时' . $result;
+                }
                 $length = floor($length / 24);
                 $result = $length . '天' . $result;
-            } else { $result = $length . '小时' . $result;}
-        } else { $result = $length . '分' . $result;}
-    } else { $result = $length . '秒';
+            } else {
+                $result = $length . '小时' . $result;
+            }
+        } else {
+            $result = $length . '分' . $result;
+        }
+    } else {
+        $result = $length . '秒';
     }
     return $result;
 }
@@ -58,7 +77,9 @@ if (isset($_GET['cid'])) {
         $password = $_POST['password'];
     }
 
-    if (get_magic_quotes_gpc()) {$password = stripslashes($password);}
+    if (get_magic_quotes_gpc()) {
+        $password = stripslashes($password);
+    }
 
     if ($rows_cnt == 0) {
         $view_title = "比赛已经关闭!";
@@ -92,7 +113,7 @@ if (isset($_GET['cid'])) {
 
         if (!isset($_SESSION[$OJ_NAME . '_' . 'administrator']) && $now < $start_time) {
             $view_errors = "<h2>$MSG_PRIVATE_WARNING</h2>";
-            require "template/" . $OJ_TEMPLATE . "/error.php";
+            require "template/$OJ_TEMPLATE/error.php";
             exit(0);
         }
     }
@@ -100,7 +121,7 @@ if (isset($_GET['cid'])) {
     if (!$contest_ok) {
         $view_errors = "<h2>$MSG_PRIVATE_WARNING <br><a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
         $view_errors .= "<form method=post action='contest.php?cid=$cid'>$MSG_CONTEST $MSG_PASSWORD:<input class=input-mini type=password name=password><input class=btn type=submit></form>";
-        require "template/" . $OJ_TEMPLATE . "/error.php";
+        require "template/$OJ_TEMPLATE/error.php";
         exit(0);
     }
 
@@ -154,7 +175,9 @@ if (isset($_GET['cid'])) {
     $view_total_page = intval($total / $page_cnt) + 1;
     $keyword = "";
 
-    if (isset($_POST['keyword'])) {$keyword = "%" . $_POST['keyword'] . "%";}
+    if (isset($_POST['keyword'])) {
+        $keyword = "%" . $_POST['keyword'] . "%";
+    }
     //echo "$keyword";
 
     $mycontests = "";
@@ -243,10 +266,12 @@ if (isset($_GET['cid'])) {
 
 /////////////////////////Template
 if (isset($_GET['cid'])) {
-    require "template/" . $OJ_TEMPLATE . "/contest.php";
+    require "template/$OJ_TEMPLATE/contest.php";
 } else {
-    require "template/" . $OJ_TEMPLATE . "/contestset.php";
+    require "template/$OJ_TEMPLATE/contestset.php";
 }
+
+require "oj-footer.php";
 
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {

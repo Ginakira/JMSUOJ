@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
 
     <title><?php echo htmlentities(str_replace("\n\r", "\n", $view_user), ENT_QUOTES, "utf-8") ?></title>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <h1>Balloon Ticket</h1>
 <?php
 echo "<h2>" . htmlentities(str_replace("\n\r", "\n", $view_user), ENT_QUOTES, "utf-8") . "\n";

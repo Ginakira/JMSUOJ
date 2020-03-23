@@ -78,7 +78,7 @@ $MSG_CODE_LENGTH = "代码长度";
 $MSG_SUBMIT_TIME = "提交时间";
 
 $MSG_SEARCH = "查找";
-$MSG_PROBLEM_ID = "题目编号";
+$MSG_PROBLEM_ID = "编号";
 $MSG_TITLE = "标题";
 $MSG_SOURCE = "来源/分类";
 $MSG_SUBMIT = "提交";
