@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME ?></title>
+    <title>比赛&作业 | <?php echo $OJ_NAME ?></title>
     <?php include "template/$OJ_TEMPLATE/css.php"; ?>
 
 
@@ -22,86 +22,100 @@
 <body class="d-flex flex-column h-100">
 
 <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
-<div class="container">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <center>
-            <div>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row mb-2 align-items-center">
+            <div class="col text-center">
                 <h3>Contest<?php echo $view_cid ?> - <?php echo $view_title ?></h3>
                 <p class='text-muted'><?php echo $view_description ?></p>
-                开始时间: <font class='text-info'><?php echo $view_start_time ?></font>&nbsp;
-                结束时间: <font class='text-info'><?php echo $view_end_time ?></font><br>
-                <?php if (isset($OJ_RANK_LOCK_PERCENT) && $OJ_RANK_LOCK_PERCENT != 0) { ?>
-                    Lock Board Time: <font color=#993399><?php echo date("Y-m-d H:i:s", $view_lock_time) ?></font><br/>
-                <?php } ?>
-                当前服务器时间: <font class='text-info'><span id=nowdate> <?php echo date("Y-m-d H:i:s") ?></span></font>
-                <br/>
-                状态：<?php
-                if ($now > $end_time) {
-                    echo " <span class='text-danger'>已结束</span>";
-                } else if ($now < $start_time) {
-                    echo " <span class='text-primary'>即将开始</span>";
-                } else {
-                    echo " <span class='text-success'>进行中</span>";
-                }
+            </div>
+            <div class="col text-center">
+                <div class="alert alert-info">
+                    开始时间:
+                    <font class='text-info'><?php echo $view_start_time ?></font>&nbsp;
+                    结束时间: <font class='text-info'><?php echo $view_end_time ?></font><br>
+                    <?php if (isset($OJ_RANK_LOCK_PERCENT) && $OJ_RANK_LOCK_PERCENT != 0) { ?>
+                        榜单锁定时间: <font color=#993399><?php echo date("Y-m-d H:i:s", $view_lock_time) ?></font>
+                        <br/>
+                    <?php } ?>
+                    当前服务器时间: <font class='text-info'><span id=nowdate> <?php echo date("Y-m-d H:i:s") ?></span></font>
+                    <br/>
+                    状态：<?php
+                    if ($now > $end_time) {
+                        echo " <span class='text-danger'>已结束</span>";
+                    } else if ($now < $start_time) {
+                        echo " <span class='text-primary'>即将开始</span>";
+                    } else {
+                        echo " <span class='text-success'>进行中</span>";
+                    }
 
-                ?>&nbsp;&nbsp;
-                类别：
-                <?php
-                if ($view_private == '0') {
-                    echo " <span class='text-primary'>公开</font>";
-                } else {
-                    echo " <span class='text-danger'>非公开</font>";
-                }
+                    ?>&nbsp;&nbsp;
+                    类别：
+                    <?php
+                    if ($view_private == '0') {
+                        echo " <span class='text-primary'>公开</font>";
+                    } else {
+                        echo " <span class='text-danger'>非公开</font>";
+                    }
 
-                ?>
-                <br><br>
-                <a class='btn btn-info btn-sm' href='status.php?cid=<?php echo $view_cid ?>'><i
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2 text-center">
+            <div class="col">
+                <a class='btn btn-outline-info btn-sm' href='status.php?cid=<?php echo $view_cid ?>'><i
                             class='fas fa-hourglass-half'></i> 提交记录</a>
-                <a class='btn btn-success btn-sm' href='contestrank.php?cid=<?php echo $view_cid ?>'><i
+                <a class='btn btn-outline-success btn-sm' href='contestrank.php?cid=<?php echo $view_cid ?>'><i
                             class='fas fa-thumbs-up'></i> 排名</a>
-                <a class='btn btn-secondary btn-sm' href='conteststatistics.php?cid=<?php echo $view_cid ?>'><i
+                <a class='btn btn-outline-secondary btn-sm' href='conteststatistics.php?cid=<?php echo $view_cid ?>'><i
                             class='fas fa-file-alt'></i> 统计</a>
             </div>
-            <table id='problemset' class='table table-striped' width='90%'>
-                <thead>
-                <tr align=center class='toprow'>
-                    <td width='5'>
-                    <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');"><?php echo $MSG_PROBLEM_ID ?>
-                    <td width='60%'><?php echo $MSG_TITLE ?></td>
-                    <td width='10%'><?php echo $MSG_SOURCE ?></td>
-                    <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');"
-                        width='5%'><?php echo $MSG_AC ?></td>
-                    <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');"
-                        width='5%'><?php echo $MSG_SUBMIT ?></td>
-                </tr>
-                </thead>
-                <tbody align='center'>
-                <?php
-                $cnt = 0;
-                foreach ($view_problemset as $row) {
-                    if ($cnt) {
-                        echo "<tr class='oddrow'>";
-                    } else {
-                        echo "<tr class='evenrow'>";
-                    }
+        </div>
+        <div class="row">
+            <div class="col">
+                <table id='problemset' class='table table-hover table-bordered'>
 
-                    foreach ($row as $table_cell) {
-                        echo "<td>";
-                        echo "\t" . $table_cell;
-                        echo "</td>";
+                    <thead class="thead-light text-center">
+                    <tr>
+                        <th></th>
+                        <th style="cursor:pointer"
+                            onclick="sortTable('problemset', 1, 'int');"><?php echo $MSG_PROBLEM_ID ?></th>
+                        <th><?php echo $MSG_TITLE ?></th>
+                        <th><?php echo $MSG_SOURCE ?></th>
+                        <th style="cursor:pointer"
+                            onclick="sortTable('problemset', 4, 'int');"><?php echo $MSG_AC ?></th>
+                        <th style="cursor:pointer"
+                            onclick="sortTable('problemset', 5, 'int');"><?php echo $MSG_SUBMIT ?></th>
+                    </tr>
+                    </thead>
+                    <tbody align='center'>
+                    <?php
+                    $cnt = 0;
+                    foreach ($view_problemset as $row) {
+                        if ($cnt) {
+                            echo "<tr class='oddrow'>";
+                        } else {
+                            echo "<tr class='evenrow'>";
+                        }
+
+                        foreach ($row as $table_cell) {
+                            echo "<td>";
+                            echo "\t" . $table_cell;
+                            echo "</td>";
+                        }
+                        echo "</tr>";
+                        $cnt = 1 - $cnt;
                     }
-                    echo "</tr>";
-                    $cnt = 1 - $cnt;
-                }
-                ?>
-                </tbody>
-            </table>
-        </center>
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-</div> <!-- /container -->
-
+    </div>
+</main>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

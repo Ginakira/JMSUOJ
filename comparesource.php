@@ -10,6 +10,7 @@ require_once("./include/const.inc.php");
 if (!isset($_GET['left'])) {
     $view_errors = "No such code!\n";
     require "template/$OJ_TEMPLATE/error.php";
+    require "oj-footer.php";
     exit(0);
 }
 $ok = false;

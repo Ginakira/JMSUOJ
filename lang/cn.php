@@ -88,7 +88,7 @@ $MSG_RESET = "重置";
 $MSG_Number = "名次";
 $MSG_NICK = "昵称";
 $MSG_SOVLED = "解决";
-$MSG_RATIO = "比率";
+$MSG_RATIO = "通过率";
 
 //registerpage.php
 $MSG_USER_ID = "用户ID";

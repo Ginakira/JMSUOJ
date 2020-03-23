@@ -25,7 +25,6 @@ if (isset($_GET['fb']) && intval($_GET['fb']) == 1) {
 <input onclick="window.print();" type="button" value="<?php echo $MSG_PRINTER ?>">
 <input onclick="location.href='balloon.php?id=<?php echo $id ?>&cid=<?php echo $cid ?>';" type="button"
        value="<?php echo $MSG_PRINT_DONE ?>">
-<img src="image/wx.jpg" height="100px" width="100px">
 <?php echo $view_map ?>
 <script src="template/bs3/jquery.min.js"></script>
 <script>

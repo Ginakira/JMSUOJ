@@ -162,9 +162,9 @@
                         <th>
                             <?php echo $MSG_SUBMIT_TIME ?>
                         </th>
-                        <th class='hidden-xs'>
-                            <?php echo $MSG_JUDGER ?>
-                        </th>
+                        <?php if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+                            echo "<th class='hidden-xs'>$MSG_JUDGER</th>";
+                        } ?>
                     </tr>
                     </thead>
                     <tbody>

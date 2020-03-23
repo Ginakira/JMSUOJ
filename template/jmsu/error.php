@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME ?></title>
+    <title>错误 | <?php echo $OJ_NAME ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php"); ?>
 
 
@@ -20,17 +20,21 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-
 <?php include("template/$OJ_TEMPLATE/nav.php"); ?>
-<div class="container">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <?php echo $view_errors ?>
-        <p>
-        </p>
-    </div>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col text-center">
+                <div class="card border-danger text-danger m-auto" style="max-width: 50rem">
+                    <div class="card-header">错误提示</div>
+                    <div class="card-body"><?php echo $view_errors ?></div>
+                </div>
+            </div>
+        </div>
 
-</div> <!-- /container -->
+    </div>
+</main>
 
 
 <!-- Bootstrap core JavaScript

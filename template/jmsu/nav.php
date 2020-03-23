@@ -22,7 +22,8 @@ if ($OJ_ONLINE) {
 ?>
 <!-- Static navbar -->
 <header>
-    <nav class="navbar navbar-expand-lg bg-info navbar-dark fixed-top py-2 shadow-lg" role="navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 shadow-lg" role="navigation"
+         style="background-color: #0f4c81">
         <div class="container">
             <a class="navbar-brand font-weight-bold" href="<?php echo $OJ_HOME ?>"><?php echo $OJ_NAME ?></a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar"

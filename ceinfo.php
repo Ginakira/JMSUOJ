@@ -10,6 +10,7 @@ require_once("./include/const.inc.php");
 if (!isset($_GET['sid'])) {
     $view_errors = "No such code!\n";
     require "template/$OJ_TEMPLATE/error.php";
+    require "oj-footer.php";
     exit(0);
 
 }
@@ -30,8 +31,21 @@ $id = intval($_GET['sid']);
 $sql = "SELECT * FROM `solution` WHERE `solution_id`=?";
 $result = pdo_query($sql, $id);
 $row = $result[0];
+
+// 用于具体评测信息页的顶部表格展示
+$solution_info = array(
+    "sid" => $row['solution_id'],
+    "pid" => $row['problem_id'],
+    "uid" => $row['user_id'],
+    "time" => $row['time'],
+    "memory" => $row['memory'],
+    "length" => $row['code_length'],
+    "score" => $row['pass_rate'] * 100,
+    "date" => $row['judgetime']
+);
+
 if ($row && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) $ok = true;
-if (isset($_SESSION[$OJ_NAME . '_' . 'source_browser'])) $ok = true;
+if (isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) || isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) $ok = true;
 $view_reinfo = "";
 if ($ok == true) {
     if ($row['user_id'] != $_SESSION[$OJ_NAME . '_' . 'user_id'])
@@ -48,6 +62,7 @@ if ($ok == true) {
 
     $view_errors = "I am sorry, You could not view this message!";
     require "template/$OJ_TEMPLATE/error.php";
+    require "oj-footer.php";
     exit(0);
 
 }

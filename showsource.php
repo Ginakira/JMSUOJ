@@ -66,6 +66,12 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'administrator']) || isset($_SESSION[$OJ_NA
     $ok = true;
 }
 
+if (!$ok) {
+    $view_errors = "抱歉，您没有权限查看此信息!";
+    require "template/$OJ_TEMPLATE/error.php";
+    exit(0);
+}
+
 $sql = "SELECT `source` FROM `source_code_user` WHERE `solution_id`=?";
 $result = pdo_query($sql, $id);
 $row = $result[0];
@@ -74,7 +80,8 @@ if ($row) {
 }
 
 /////////////////////////Template
-require "template/" . $OJ_TEMPLATE . "/showsource.php";
+require "template/$OJ_TEMPLATE/showsource.php";
+require "oj-footer.php";
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';

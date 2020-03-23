@@ -48,7 +48,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
         (isset($OJ_MAIL) && !$OJ_MAIL)) {
     } else {
         $mail = checkmail();
-        if ($mail) $profile .= "&nbsp;<li><a class='glyphicon glyphicon-envelope' href=" . $path_fix . "mail.php>$mail</a></li>";
+        if ($mail) $profile .= "&nbsp;<li><a class='dropdown-item glyphicon glyphicon-envelope' href=" . $path_fix . "mail.php>$mail</a></li>";
     }
 
     $profile .= "&nbsp;<li><a class='dropdown-item' href='" . $path_fix . "status.php?user_id=$sid'><span id=red>$MSG_MY_SUBMISSIONS</span></a></li>";
@@ -85,7 +85,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
 }
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'balloon'])) {
-    $profile .= "<li><a href='" . $path_fix . "balloon.php'>$MSG_BALLOON</a></li>&nbsp;";
+    $profile .= "<li><a class='dropdown-item' href='" . $path_fix . "balloon.php'>$MSG_BALLOON</a></li>&nbsp;";
 }
 
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator']) || isset($_SESSION[$OJ_NAME . '_' . 'contest_creator']) || isset($_SESSION[$OJ_NAME . '_' . 'problem_editor'])) {
