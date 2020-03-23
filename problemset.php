@@ -10,7 +10,7 @@ $view_title = "Problem Set";
 $first = 1000;
 //if($OJ_SAE) $first=1;
 $sql = "select max(`problem_id`) as upid FROM `problem`";
-$page_cnt = 100;
+$page_cnt = 50;
 $result = mysql_query_cache($sql);
 $row = $result[0];
 $cnt = $row['upid'] - $first;
@@ -44,9 +44,9 @@ $sub_arr = array();
 // submit
 if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     $sql = "SELECT `problem_id` FROM `solution` WHERE `user_id`=?" .
-    //  " AND `problem_id`>='$pstart'".
-    // " AND `problem_id`<'$pend'".
-    " group by `problem_id`";
+        //  " AND `problem_id`>='$pstart'".
+        // " AND `problem_id`<'$pend'".
+        " group by `problem_id`";
     $result = pdo_query($sql, $_SESSION[$OJ_NAME . '_' . 'user_id']);
     foreach ($result as $row) {
         $sub_arr[$row[0]] = true;
@@ -57,9 +57,9 @@ $acc_arr = array();
 // ac
 if (isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     $sql = "SELECT `problem_id` FROM `solution` WHERE `user_id`=?" .
-    //  " AND `problem_id`>='$pstart'".
-    //  " AND `problem_id`<'$pend'".
-    " AND `result`=4" .
+        //  " AND `problem_id`>='$pstart'".
+        //  " AND `problem_id`<'$pend'".
+        " AND `result`=4" .
         " group by `problem_id`";
     $result = pdo_query($sql, $_SESSION[$OJ_NAME . '_' . 'user_id']);
     foreach ($result as $row) {
@@ -126,7 +126,7 @@ foreach ($result as $row) {
     $view_problemset[$i][2] = "<div class='left'><a href='problem.php?id=" . $row['problem_id'] . "'>" . $row['title'] . "</a></div>";
     //3号 通过率显示进度条 使用bootstrap4样式
     $pass_percent = round($row['accepted'] / ($row['accepted'] + $row['submit']) * 100);
-    $view_problemset[$i][3] = "<div class='progress' style='margin:0 10px 0 10px;height:20px'><div class='progress-bar bg-primary' style='width:" . $pass_percent . "%'>" . $pass_percent . "%</div></div>";
+    $view_problemset[$i][3] = "<div class='progress' style='margin:0 10px 0 10px;height:20px'><div class='progress-bar bg-success' style='width:" . $pass_percent . "%'>" . $pass_percent . "%</div></div>";
     $view_problemset[$i][4] = "<div pid='" . $row['problem_id'] . "' fd='source' class='center'>";
     foreach ($category as $cat) {
         if (trim($cat) == "") {
@@ -148,7 +148,8 @@ foreach ($result as $row) {
     $i++;
 }
 
-require "template/" . $OJ_TEMPLATE . "/problemset.php";
+require "template/$OJ_TEMPLATE/problemset.php";
+require "oj-footer.php";
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';
 }

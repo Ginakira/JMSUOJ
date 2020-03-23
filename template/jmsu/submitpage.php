@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,29 +24,30 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php"); ?>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <center>
-            <script src="include/checksource.js"></script>
-            <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
-                <?php if (isset($id)) { ?>
-                    Problem <span class=blue><b><?php echo $id ?></b></span>
-                    <input id=problem_id type='hidden' value='<?php echo $id ?>' name="id"><br>
-                <?php } else {
-                    //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+<?php include("template/$OJ_TEMPLATE/nav.php"); ?>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col text-center">
+                <script src="include/checksource.js"></script>
+                <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
+                    <?php if (isset($id)) { ?>
+                        Problem <span class=blue><b><?php echo $id ?></b></span>
+                        <input id=problem_id type='hidden' value='<?php echo $id ?>' name="id"><br>
+                    <?php } else {
+                        //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
-                    ?>
-                    Problem <span class=blue><b><?php echo chr($pid + ord('A')) ?></b></span> of Contest <span
-                            class=blue><b><?php echo $cid ?></b></span><br>
-                    <input id="cid" type='hidden' value='<?php echo $cid ?>' name="cid">
-                    <input id="pid" type='hidden' value='<?php echo $pid ?>' name="pid">
-                    <?php
-                } ?>
-                <span id="language_span">语言:
+                        ?>
+                        Problem <span class=blue><b><?php echo chr($pid + ord('A')) ?></b></span> of Contest <span
+                                class=blue><b><?php echo $cid ?></b></span><br>
+                        <input id="cid" type='hidden' value='<?php echo $cid ?>' name="cid">
+                        <input id="pid" type='hidden' value='<?php echo $pid ?>' name="pid">
+                        <?php
+                    } ?>
+                    <span id="language_span">语言:
 <select id="language" name="language" onChange="reloadtemplate($(this).val());">
 <?php
 $lang_count = count($language_ext);
@@ -78,50 +79,52 @@ for ($i = 0; $i < $lang_count; $i++) {
 
 <br>
 </span>
-                <?php if ($OJ_ACE_EDITOR) { ?>
-                    <pre style="width:80%;height:600" cols=180 rows=20
-                         id="source"><?php echo htmlentities($view_src, ENT_QUOTES, "UTF-8") ?></pre><br>
-                    <input type=hidden id="hide_source" name="source" value=""/>
-                <?php } else { ?>
-                    <textarea style="width:80%;height:600" cols=180 rows=20 id="source"
-                              name="source"><?php echo htmlentities($view_src, ENT_QUOTES, "UTF-8") ?></textarea><br>
-                <?php } ?>
+                    <?php if ($OJ_ACE_EDITOR) { ?>
+                        <pre style="width:100%;height:580px;" cols=180 rows=20
+                             id="source"><?php echo htmlentities($view_src, ENT_QUOTES, "UTF-8") ?></pre><br>
+                        <input type=hidden id="hide_source" name="source" value=""/>
+                    <?php } else { ?>
+                        <textarea style="width:100%;height:580px" cols=180 rows=20 id="source"
+                                  name="source"><?php echo htmlentities($view_src, ENT_QUOTES, "UTF-8") ?></textarea>
+                        <br>
+                    <?php } ?>
 
-                <?php if (isset($OJ_TEST_RUN) && $OJ_TEST_RUN) { ?>
-                    <?php echo $MSG_Input ?>:<textarea style="width:30%" cols=40 rows=5 id="input_text"
-                                                       name="input_text"><?php echo $view_sample_input ?></textarea>
-                    <?php echo $MSG_Output ?>:
-                    <textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true">SHOULD BE:
+                    <?php if (isset($OJ_TEST_RUN) && $OJ_TEST_RUN) { ?>
+                        <?php echo $MSG_Input ?>:<textarea style="width:30%" cols=40 rows=5 id="input_text"
+                                                           name="input_text"><?php echo $view_sample_input ?></textarea>
+                        <?php echo $MSG_Output ?>:
+                        <textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true">SHOULD BE:
 <?php echo $view_sample_output ?>
 </textarea>
-                    <br>
-                <?php } ?>
-                <input id="Submit" class="btn btn-success" style="width:30%" type=button
-                       value="<?php echo $MSG_SUBMIT ?>" onclick="do_submit();">
-                <?php if (isset($OJ_ENCODE_SUBMIT) && $OJ_ENCODE_SUBMIT) { ?>
-                    <input class="btn btn-success" title="WAF gives you reset ? try this." type=button
-                           value="Encoded <?php echo $MSG_SUBMIT ?>" onclick="encoded_submit();">
-                    <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
-                <?php } ?>
+                        <br>
+                    <?php } ?>
+                    <input id="Submit" class="btn btn-success" style="width:30%" type=button
+                           value="<?php echo $MSG_SUBMIT ?>" onclick="do_submit();">
+                    <?php if (isset($OJ_ENCODE_SUBMIT) && $OJ_ENCODE_SUBMIT) { ?>
+                        <input class="btn btn-success" title="WAF gives you reset ? try this." type=button
+                               value="Encoded <?php echo $MSG_SUBMIT ?>" onclick="encoded_submit();">
+                        <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
+                    <?php } ?>
 
-                <?php if (isset($OJ_TEST_RUN) && $OJ_TEST_RUN) { ?>
-                    <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR ?>"
-                           onclick=do_test_run();>
-                    <span class="btn" id=result>状态</span>
-                <?php } ?>
-                <?php if (isset($OJ_BLOCKLY) && $OJ_BLOCKLY) { ?>
-                    <input id="blockly_loader" type=button class="btn" onclick="openBlockly()"
-                           value="<?php echo $MSG_BLOCKLY_OPEN ?>" style="color:white;background-color:rgb(169,91,128)">
-                    <input id="transrun" type=button class="btn" onclick="loadFromBlockly() "
-                           value="<?php echo $MSG_BLOCKLY_TEST ?>"
-                           style="display:none;color:white;background-color:rgb(90,164,139)">
-                    <div id="blockly" class="center">Blockly</div>
-                <?php } ?>
-            </form>
-        </center>
+                    <?php if (isset($OJ_TEST_RUN) && $OJ_TEST_RUN) { ?>
+                        <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR ?>"
+                               onclick=do_test_run();>
+                        <span class="btn" id=result>状态</span>
+                    <?php } ?>
+                    <?php if (isset($OJ_BLOCKLY) && $OJ_BLOCKLY) { ?>
+                        <input id="blockly_loader" type=button class="btn" onclick="openBlockly()"
+                               value="<?php echo $MSG_BLOCKLY_OPEN ?>"
+                               style="color:white;background-color:rgb(169,91,128)">
+                        <input id="transrun" type=button class="btn" onclick="loadFromBlockly() "
+                               value="<?php echo $MSG_BLOCKLY_TEST ?>"
+                               style="display:none;color:white;background-color:rgb(90,164,139)">
+                        <div id="blockly" class="center">Blockly</div>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
     </div>
-
-</div> <!-- /container -->
+</main>
 
 
 <!-- Bootstrap core JavaScript

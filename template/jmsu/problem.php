@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>
-        <?php echo $OJ_NAME ?><?php echo $OJ_BBS ?>
+        #<?php echo $_GET['id'] ?> | <?php echo $OJ_NAME; ?>
     </title>
 
     <?php include "template/$OJ_TEMPLATE/css.php"; ?>
@@ -21,205 +21,204 @@
     <![endif]-->
 </head>
 
-<body>
-<div class="container">
-    <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<body class="d-flex flex-column h-100">
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <?php
+                        if ($pr_flag) {
+                            echo "<title>$MSG_PROBLEM" . $row['problem_id'] . "--" . $row['title'] . "</title>";
+                            echo "<center><h3>#$id-" . $row['title'] . "</h3>";
+                        } else {
+                            //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            $id = $row['problem_id'];
+                            echo "<title>$MSG_PROBLEM " . $PID[$pid] . ": " . $row['title'] . " </title>";
+                            echo "<center><h3>$MSG_PROBLEM " . $PID[$pid] . ": " . $row['title'] . "</h3>";
+                        }
 
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron"></div>
+                        echo "<span>$MSG_Time_Limit: </span><span><span class='badge badge-light' fd='time_limit' pid='" . $row['problem_id'] . "'  >" . $row['time_limit'] . " Sec</span></span>&nbsp;&nbsp;";
+                        echo "<span>$MSG_Memory_Limit: </span><span class='badge badge-light'>" . $row['memory_limit'] . " MB</span>";
 
-    <div class="card">
-        <div class="card-header">
-            <?php
-            if ($pr_flag) {
-                echo "<title>$MSG_PROBLEM" . $row['problem_id'] . "--" . $row['title'] . "</title>";
-                echo "<center><h3>#$id-" . $row['title'] . "</h3>";
-            } else {
-                //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                $id = $row['problem_id'];
-                echo "<title>$MSG_PROBLEM " . $PID[$pid] . ": " . $row['title'] . " </title>";
-                echo "<center><h3>$MSG_PROBLEM " . $PID[$pid] . ": " . $row['title'] . "</h3>";
-            }
+                        if ($row['spj']) {
+                            echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
+                        }
 
-            echo "<span>$MSG_Time_Limit: </span><span><span class='badge badge-light' fd='time_limit' pid='" . $row['problem_id'] . "'  >" . $row['time_limit'] . " Sec</span></span>&nbsp;&nbsp;";
-            echo "<span>$MSG_Memory_Limit: </span><span class='badge badge-light'>" . $row['memory_limit'] . " MB</span>";
+                        if (isset($OJ_OI_MODE) && $OJ_OI_MODE) {
+                            echo "<br>";
+                        } else {
+                            echo "<br><span style='line-height:30px;'><span>$MSG_SUBMIT: </span><span class='badge badge-info'>" . $row['submit'] . "</span>&nbsp;&nbsp;";
+                            echo "<span>$MSG_SOVLED: </span><span class='badge badge-success'>" . $row['accepted'] . "</span></span><br>";
+                            echo "<a class='btn btn-outline-info btn-sm' href='problemstatus.php?id=" . $row['problem_id'] . "'><i class='fas fa-chart-bar'></i> $MSG_STATUS</a> ";
+                            echo "<a class='btn btn-outline-dark btn-sm' href='https://bbs.jmsu.xyz/'><i class='fas fa-comment-alt'></i> $MSG_BBS</a> ";
+                        }
 
-            if ($row['spj']) {
-                echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
-            }
+                        if ($pr_flag) {
+                            echo "<a class='btn btn-outline-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+                        } else {
+                            echo "<a class='btn btn-outline-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+                        }
 
-            if (isset($OJ_OI_MODE) && $OJ_OI_MODE) {
-                echo "<br>";
-            } else {
-                echo "<br><span style='line-height:30px;'><span>$MSG_SUBMIT: </span><span class='badge badge-info'>" . $row['submit'] . "</span>&nbsp;&nbsp;";
-                echo "<span>$MSG_SOVLED: </span><span class='badge badge-success'>" . $row['accepted'] . "</span></span><br>";
-                echo "<a class='btn btn-info btn-sm' href='problemstatus.php?id=" . $row['problem_id'] . "'><i class='fas fa-chart-bar'></i> $MSG_STATUS</a> ";
-                if ($OJ_BBS) {
-                    echo "<a class='btn btn-dark btn-sm' href='bbs.php?pid=" . $row['problem_id'] . "$ucid'><i class='fas fa-comment-alt'></i> $MSG_BBS</a> ";
-                }
-            }
+                        //命题人信息
+                        //echo "<span class='badge badge-secondary'>$MSG_Creator:<span id='creator'></span></span>";
 
-            if ($pr_flag) {
-                echo "<a class='btn btn-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-            } else {
-                echo "<a class='btn btn-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-            }
+                        if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+                            require_once "include/set_get_key.php"; ?>
 
-            //命题人信息
-            //echo "<span class='badge badge-secondary'>$MSG_Creator:<span id='creator'></span></span>";
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i
+                                        class='fas fa-edit'></i> 编辑</a>
+                            <a class="btn btn-outline-secondary btn-sm"
+                               href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i
+                                        class='fas fa-database'></i> 测试数据</a>
 
-            if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-                require_once "include/set_get_key.php"; ?>
+                            <?php
+                        }
 
-                <a class="btn btn-primary btn-sm"
-                   href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i
-                            class='fas fa-edit'></i> 编辑</a>
-                <a class="btn btn-secondary btn-sm" href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i
-                            class='fas fa-database'></i> 测试数据</a>
+                        echo "</center>";
+                        # end of head
+                        echo "</div>";
+                        echo "<!--StartMarkForVirtualJudge-->";
+                        ?>
 
-                <?php
-            }
+                        <div class="card-body">
+                            <div class='card' style="margin-bottom:15px;">
+                                <div class='card-header'>
+                                    <h5>
+                                        <?php echo $MSG_Description ?>
+                                    </h5>
+                                </div>
+                                <div class='card-body content'>
+                                    <?php echo $row['description'] ?>
+                                </div>
+                            </div>
 
-            echo "</center>";
-            # end of head
-            echo "</div>";
-            echo "<!--StartMarkForVirtualJudge-->";
-            ?>
+                            <?php
+                            if ($row['input']) { ?>
+                                <div class='card' style="margin-bottom:15px;">
+                                    <div class='card-header'>
+                                        <h5>
+                                            <?php echo $MSG_Input ?>
+                                        </h5>
+                                    </div>
+                                    <div class='card-body content'>
+                                        <?php echo $row['input'] ?>
+                                    </div>
+                                </div>
+                            <?php }
+                            if ($row['output']) { ?>
+                                <div class='card' style="margin-bottom:15px;">
+                                    <div class='card-header'>
+                                        <h5>
+                                            <?php echo $MSG_Output ?>
+                                        </h5>
+                                    </div>
+                                    <div class='card-body content'>
+                                        <?php echo $row['output'] ?>
+                                    </div>
+                                </div>
+                            <?php }
+                            $sinput = str_replace("<", "&lt;", $row['sample_input']);
+                            $sinput = str_replace(">", "&gt;", $sinput);
+                            $soutput = str_replace("<", "&lt;", $row['sample_output']);
+                            $soutput = str_replace(">", "&gt;", $soutput);
 
-            <div class="card-body">
-                <div class='card' style="margin-bottom:15px;">
-                    <div class='card-header'>
-                        <h5>
-                            <?php echo $MSG_Description ?>
-                        </h5>
-                    </div>
-                    <div class='card-body content'>
-                        <?php echo $row['description'] ?>
-                    </div>
-                </div>
-
-                <?php
-                if ($row['input']) { ?>
-                    <div class='card' style="margin-bottom:15px;">
-                        <div class='card-header'>
-                            <h5>
-                                <?php echo $MSG_Input ?>
-                            </h5>
-                        </div>
-                        <div class='card-body content'>
-                            <?php echo $row['input'] ?>
-                        </div>
-                    </div>
-                <?php }
-                if ($row['output']) { ?>
-                    <div class='card' style="margin-bottom:15px;">
-                        <div class='card-header'>
-                            <h5>
-                                <?php echo $MSG_Output ?>
-                            </h5>
-                        </div>
-                        <div class='card-body content'>
-                            <?php echo $row['output'] ?>
-                        </div>
-                    </div>
-                <?php }
-                $sinput = str_replace("<", "&lt;", $row['sample_input']);
-                $sinput = str_replace(">", "&gt;", $sinput);
-                $soutput = str_replace("<", "&lt;", $row['sample_output']);
-                $soutput = str_replace(">", "&gt;", $soutput);
-
-                if (strlen($sinput)) { ?>
-                    <div class='card' style="margin-bottom:15px;">
-                        <div class='card-header'>
-                            <h5>
-                                <?php echo $MSG_Sample_Input ?>
-                                <a class="btn btn-secondary btn-sm"
-                                   href="javascript:CopyToClipboard($('#sampleinput').text())">复制</a>
-                            </h5>
-                        </div>
-                        <div class='card-body'>
+                            if (strlen($sinput)) { ?>
+                                <div class='card' style="margin-bottom:15px;">
+                                    <div class='card-header'>
+                                        <h5>
+                                            <?php echo $MSG_Sample_Input ?>
+                                            <a class="btn btn-outline-secondary btn-sm"
+                                               href="javascript:CopyToClipboard($('#sampleinput').text())">复制</a>
+                                        </h5>
+                                    </div>
+                                    <div class='card-body'>
                             <pre class=content><span id="sampleinput"
                                                      class=sampledata><?php echo $sinput ?></span></pre>
-                        </div>
-                    </div>
-                <?php }
+                                    </div>
+                                </div>
+                            <?php }
 
-                if (strlen($soutput)) { ?>
-                    <div class='card' style="margin-bottom:15px;">
-                        <div class='card-header'>
-                            <h5>
-                                <?php echo $MSG_Sample_Output ?>
-                                <a class="btn btn-secondary btn-sm"
-                                   href="javascript:CopyToClipboard($('#sampleoutput').text())">复制</a>
-                            </h5>
-                        </div>
-                        <div class='card-body'>
+                            if (strlen($soutput)) { ?>
+                                <div class='card' style="margin-bottom:15px;">
+                                    <div class='card-header'>
+                                        <h5>
+                                            <?php echo $MSG_Sample_Output ?>
+                                            <a class="btn btn-outline-secondary btn-sm"
+                                               href="javascript:CopyToClipboard($('#sampleoutput').text())">复制</a>
+                                        </h5>
+                                    </div>
+                                    <div class='card-body'>
                             <pre class=content><span id='sampleoutput'
                                                      class=sampledata><?php echo $soutput ?></span></pre>
-                        </div>
-                    </div>
-                <?php }
+                                    </div>
+                                </div>
+                            <?php }
 
-                if ($row['hint']) { ?>
-                    <div class='card' style="margin-bottom:15px;">
-                        <div class='card-header'>
-                            <h5>
-                                <?php echo $MSG_HINT ?>
-                            </h5>
-                        </div>
-                        <div class='card-body content'>
-                            <?php echo $row['hint'] ?>
-                        </div>
-                    </div>
-                <?php }
+                            if ($row['hint']) { ?>
+                                <div class='card' style="margin-bottom:15px;">
+                                    <div class='card-header'>
+                                        <h5>
+                                            <?php echo $MSG_HINT ?>
+                                        </h5>
+                                    </div>
+                                    <div class='card-body content'>
+                                        <?php echo $row['hint'] ?>
+                                    </div>
+                                </div>
+                            <?php }
 
-                if ($pr_flag) { ?>
-                <div class='card' style="margin-bottom:15px;">
-                    <div class='card-header'>
-                        <h5>
-                            <?php echo $MSG_SOURCE ?>
+                            if ($pr_flag) { ?>
+                            <div class='card' style="margin-bottom:15px;">
+                                <div class='card-header'>
+                                    <h5>
+                                        <?php echo $MSG_SOURCE ?>
 
-                        </h5>
+                                    </h5>
+                                </div>
+                                <div fd="source" pid=<?php echo $row['problem_id'] ?> class='card-body content
+                                '>
+                                <?php
+                                $cats = explode(" ", $row['source']);
+                                foreach ($cats as $cat) {
+                                    echo "<a class='badge badge-primary' href='problemset.php?search=" . urlencode(htmlentities($cat, ENT_QUOTES, 'utf-8')) . "'>" . htmlentities($cat, ENT_QUOTES, 'utf-8') . "</a>&nbsp;";
+                                } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                     </div>
-                    <div fd="source" pid=<?php echo $row['problem_id'] ?> class='card-body content
-                    '>
-                    <?php
-                    $cats = explode(" ", $row['source']);
-                    foreach ($cats as $cat) {
-                        echo "<a class='badge badge-primary' href='problemset.php?search=" . urlencode(htmlentities($cat, ENT_QUOTES, 'utf-8')) . "'>" . htmlentities($cat, ENT_QUOTES, 'utf-8') . "</a>&nbsp;";
-                    } ?>
+                    <!--EndMarkForVirtualJudge-->
+                    <div class='card-footer text-center'>
+                        <?php
+                        if ($pr_flag) {
+                            echo "<a class='btn btn-outline-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+                        } else {
+                            echo "<a class='btn btn-outline-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
+                        }
+                        echo "<a class='btn btn-outline-info btn-sm' href='problemstatus.php?id=" . $row['problem_id'] . "'><i class='fas fa-chart-bar'></i> $MSG_STATUS</a> ";
+                        //echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
+
+                        if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+                            require_once "include/set_get_key.php"; ?>
+
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i
+                                        class='fas fa-edit'></i> 编辑</a>
+                            <a class="btn btn-outline-secondary btn-sm"
+                               href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i
+                                        class='fas fa-database'></i> 测试数据</a>
+                            <?php
+                        } ?>
+                    </div>
                 </div>
             </div>
-        <?php } ?>
-
         </div>
-        <center>
-            <!--EndMarkForVirtualJudge-->
-            <div class='card-footer'>
-                <?php
-                if ($pr_flag) {
-                    echo "<a class='btn btn-success btn-sm' href='submitpage.php?id=$id'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-                } else {
-                    echo "<a class='btn btn-success btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'><i class='fas fa-arrow-circle-up'></i> $MSG_SUBMIT</a> ";
-                }
-                echo "<a class='btn btn-info btn-sm' href='problemstatus.php?id=" . $row['problem_id'] . "'><i class='fas fa-chart-bar'></i> $MSG_STATUS</a> ";
-                //echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
-
-                if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-                    require_once "include/set_get_key.php"; ?>
-
-                    <a class="btn btn-primary btn-sm"
-                       href="admin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>"><i
-                                class='fas fa-edit'></i> 编辑</a>
-                    <a class="btn btn-secondary btn-sm" href='javascript:phpfm(<?php echo $row['problem_id']; ?>)'><i
-                                class='fas fa-database'></i> 测试数据</a>
-                    <?php
-                } ?>
-            </div>
-        </center>
     </div>
-</div>
-<!-- /container -->
+</main>
 
 
 <!-- Bootstrap core JavaScript

@@ -17,7 +17,8 @@ require_once("./include/memcache.php");
  * @param $cid
  * @return mixed
  */
-function getSubmitByCid($OJ_MEMCACHE,$cid){
+function getSubmitByCid($OJ_MEMCACHE, $cid)
+{
     if ($OJ_MEMCACHE) {
         $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`='$cid'";
         $subList = mysql_query_cache($sql);
@@ -34,7 +35,8 @@ function getSubmitByCid($OJ_MEMCACHE,$cid){
  * @param $cid
  * @return mixed
  */
-function getTeamByCid($OJ_MEMCACHE,$cid){
+function getTeamByCid($OJ_MEMCACHE, $cid)
+{
     if ($OJ_MEMCACHE) {
         $sql = "SELECT a.user_id,nick FROM (SELECT distinct user_id FROM solution WHERE contest_id = '$cid')AS a INNER JOIN users WHERE users.user_id = a.user_id";
         $teamList = mysql_query_cache($sql);
@@ -51,7 +53,8 @@ function getTeamByCid($OJ_MEMCACHE,$cid){
  * @param $cid
  * @return array
  */
-function getProblemMapByCid($OJ_MEMCACHE,$cid) {
+function getProblemMapByCid($OJ_MEMCACHE, $cid)
+{
     if ($OJ_MEMCACHE) {
         $sql = "SELECT `problem_id`,`num` FROM contest_problem WHERE `contest_id` = '$cid'";
         $proList = mysql_query_cache($sql);
@@ -60,9 +63,9 @@ function getProblemMapByCid($OJ_MEMCACHE,$cid) {
         $proList = pdo_query($sql, $cid);
     }
     $arr = array();
-    for($i=0;$i<count($proList);$i++) {
+    for ($i = 0; $i < count($proList); $i++) {
         $row = $proList[$i];
-        $arr[$row['problem_id']] = chr(65+$row['num']);
+        $arr[$row['problem_id']] = chr(65 + $row['num']);
     }
     //print_r($arr);
     return $arr;
@@ -74,17 +77,36 @@ function getProblemMapByCid($OJ_MEMCACHE,$cid) {
  * @param $result
  * @return int
  */
-function changeResult($result){
-    switch($result) {
-        case 4 : $resultID = 0;break;
-        case 5 : $resultID = 1;break;
-        case 6 : $resultID = 4;break;
-        case 7 : $resultID = 2;break;
-        case 8 : $resultID = 3;break;
-        case 9 : $resultID = 6;break;
-        case 10 : $resultID = 5;break;
-        case 11 : $resultID = 7;break;
-        default : $resultID = -1;break;
+function changeResult($result)
+{
+    switch ($result) {
+        case 4 :
+            $resultID = 0;
+            break;
+        case 5 :
+            $resultID = 1;
+            break;
+        case 6 :
+            $resultID = 4;
+            break;
+        case 7 :
+            $resultID = 2;
+            break;
+        case 8 :
+            $resultID = 3;
+            break;
+        case 9 :
+            $resultID = 6;
+            break;
+        case 10 :
+            $resultID = 5;
+            break;
+        case 11 :
+            $resultID = 7;
+            break;
+        default :
+            $resultID = -1;
+            break;
     }
     return $resultID;
 }
@@ -94,7 +116,8 @@ function changeResult($result){
  * @param $submit
  * @param $problemMap
  */
-function submit2Array($submit,$problemMap){
+function submit2Array($submit, $problemMap)
+{
     //`solution_id`,`user_id`,`problem_id`,`in_date`,`result`
     $arr = array();
     $arr["submitID"] = $submit["solution_id"];
@@ -109,7 +132,8 @@ function submit2Array($submit,$problemMap){
  * 转换一个队伍信息成json
  * @param $team
  */
-function team2Array($team) {
+function team2Array($team)
+{
     // a.user_id,nick
     $arr = array();
     $arr["userID"] = $team["user_id"];
@@ -120,11 +144,10 @@ function team2Array($team) {
 }
 
 
-
 // 请求未带参数
 if (!isset($_GET['cid'])) {
     $view_errors = "No Such Contest";
-    require("template/" . $OJ_TEMPLATE . "/error.php");
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
@@ -138,17 +161,17 @@ $cid = intval($_GET['cid']);
     exit();
 }
 */
-if(isset($_GET['lock_percent'])){
-   $OJ_RANK_LOCK_PERCENT=floatval($_GET['lock_percent']);
-   $_SESSION[$OJ_NAME."_lock_percent"]=$OJ_RANK_LOCK_PERCENT;
+if (isset($_GET['lock_percent'])) {
+    $OJ_RANK_LOCK_PERCENT = floatval($_GET['lock_percent']);
+    $_SESSION[$OJ_NAME . "_lock_percent"] = $OJ_RANK_LOCK_PERCENT;
 }
-if(isset($_SESSION[$OJ_NAME."_lock_percent"])){
-   $OJ_RANK_LOCK_PERCENT=$_SESSION[$OJ_NAME."_lock_percent"];
+if (isset($_SESSION[$OJ_NAME . "_lock_percent"])) {
+    $OJ_RANK_LOCK_PERCENT = $_SESSION[$OJ_NAME . "_lock_percent"];
 }
 // 不封榜，就不能滚榜
-if (!isset($OJ_RANK_LOCK_PERCENT)||$OJ_RANK_LOCK_PERCENT==0) {
+if (!isset($OJ_RANK_LOCK_PERCENT) || $OJ_RANK_LOCK_PERCENT == 0) {
     $view_errors = "The Ranking is Unlocked";
-    require("template/" . $OJ_TEMPLATE . "/error.php");
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
@@ -164,7 +187,7 @@ if ($OJ_MEMCACHE) {
 // 统计查询到的个数
 if ($result) {
     $rows_cnt = count($result);
-}else {
+} else {
     $rows_cnt = 0;
 }
 
@@ -185,7 +208,7 @@ if (!$OJ_MEMCACHE) {
     // 开始时间仍然为零 说明 比赛不存在
     if ($start_time == 0) {
         $view_errors = "No Such Contest";
-        require("template/" . $OJ_TEMPLATE . "/error.php");
+        require "template/$OJ_TEMPLATE/error.php";
         exit(0);
     }
 }
@@ -193,63 +216,64 @@ if (!$OJ_MEMCACHE) {
 // 还未开始
 if ($start_time > time()) {
     $view_errors = "Contest Not Started!";
-    require("template/" . $OJ_TEMPLATE . "/error.php");
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
 // 还未结束
 if ($end_time > time()) {
     $view_errors = "Contest Not Finished!";
-    require("template/" . $OJ_TEMPLATE . "/error.php");
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
-if(time()<$end_time && stripos($title,"noip")){
-      $view_errors =  "<h2>NOIP contest !</h2>";
-      require("template/".$OJ_TEMPLATE."/error.php");
-      exit(0);
+if (time() < $end_time && stripos($title, "noip")) {
+    $view_errors = "<h2>NOIP contest !</h2>";
+    require "template/$OJ_TEMPLATE/error.php";
+    exit(0);
 }
 // json 请求时
-if (isset($_GET['type'])&&$_GET['type']=='json') {
+if (isset($_GET['type']) && $_GET['type'] == 'json') {
     header('Content-Type:application/json');
 
-    if(isset($_GET['list'])&&$_GET['list']=='submit'){
+    if (isset($_GET['list']) && $_GET['list'] == 'submit') {
 
-        $subList = getSubmitByCid($OJ_MEMCACHE,$cid);
-		$problemMap = getProblemMapByCid($OJ_MEMCACHE,$cid);
+        $subList = getSubmitByCid($OJ_MEMCACHE, $cid);
+        $problemMap = getProblemMapByCid($OJ_MEMCACHE, $cid);
 
-		$arr = array();
-		for($i=0;$i<count($subList);$i++){
-		    $arr[$i] = submit2Array($subList[$i],$problemMap);
-		}
-		echo json_encode($arr);
+        $arr = array();
+        for ($i = 0; $i < count($subList); $i++) {
+            $arr[$i] = submit2Array($subList[$i], $problemMap);
+        }
+        echo json_encode($arr);
 
-	    }else if(isset($_GET['list'])&&$_GET['list']=='team'){
-		$teamList = getTeamByCid($OJ_MEMCACHE,$cid);
-		$arr = array();
-		for($i=0;$i<count($teamList);$i++){
-		    $arr[$i] = team2Array($teamList[$i]);
-		}
-		echo json_encode($arr);
-	    }
-	    exit(0);
-	}
+    } else if (isset($_GET['list']) && $_GET['list'] == 'team') {
+        $teamList = getTeamByCid($OJ_MEMCACHE, $cid);
+        $arr = array();
+        for ($i = 0; $i < count($teamList); $i++) {
+            $arr[$i] = team2Array($teamList[$i]);
+        }
+        echo json_encode($arr);
+    }
+    exit(0);
+}
 
-	//普通请求时
-	$lock = $end_time - ($end_time - $start_time) * $OJ_RANK_LOCK_PERCENT;
-	$start_time_str = date("Y-m-d H:i:s",$start_time);
-	$lock_time_str = date("Y-m-d H:i:s",$lock);
-$problem_num = pdo_query("select count(distinct problem_id ) from contest_problem where contest_id=?",$cid)[0][0];
-if($OJ_ON_SITE_TEAM_TOTAL!=0)
- $team_num=$OJ_ON_SITE_TEAM_TOTAL;
+//普通请求时
+$lock = $end_time - ($end_time - $start_time) * $OJ_RANK_LOCK_PERCENT;
+$start_time_str = date("Y-m-d H:i:s", $start_time);
+$lock_time_str = date("Y-m-d H:i:s", $lock);
+$problem_num = pdo_query("select count(distinct problem_id ) from contest_problem where contest_id=?", $cid)[0][0];
+if ($OJ_ON_SITE_TEAM_TOTAL != 0)
+    $team_num = $OJ_ON_SITE_TEAM_TOTAL;
 else
- $team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
-$gold_num=intval($team_num*0.05);
-$silver_num=intval($team_num*0.15);
-$bronze_num=intval($team_num*0.20);
+    $team_num = pdo_query("select count(distinct user_id ) from solution where contest_id=?", $cid)[0][0];
+$gold_num = intval($team_num * 0.05);
+$silver_num = intval($team_num * 0.15);
+$bronze_num = intval($team_num * 0.20);
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/contestrank3.php");
+require "template/$OJ_TEMPLATE/contestrank3.php";
+require "oj-footer.php";
 
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php'))

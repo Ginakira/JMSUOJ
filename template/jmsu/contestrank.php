@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>比赛排名-<?php echo $OJ_NAME ?></title>
+    <title>比赛排名 | <?php echo $OJ_NAME ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php"); ?>
 
 
@@ -19,92 +19,100 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php"); ?>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <?php
-        $rank = 1;
-        ?>
-        <center><h3>比赛排名 -- <?php echo $title ?></h3>
-            <h5 class='text-muted'><?php echo $locked_msg ?></h5>
-            <a href="/contestrank.xls.php?cid=<?php echo $cid ?>">下载xls报表</a>
-            <?php
-            if ($OJ_MEMCACHE) {
-                if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-                    echo ' | <a href="contestrank3.php?cid=' . $cid . '">滚榜</a>';
-                }
+<?php include("template/$OJ_TEMPLATE/nav.php"); ?>
+
+<main role="main" class="flex-shrink-0">
+    <div class="container mb-4">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col text-center">
+                <?php
+                $rank = 1;
+                ?>
+                <h3>比赛排名 -- <?php echo $title ?></h3>
+                <h5 class='text-muted'><?php echo $locked_msg ?></h5>
+                <a href="/contestrank.xls.php?cid=<?php echo $cid ?>">下载xls报表</a>
+                <?php
                 if ($OJ_MEMCACHE) {
-                    echo '<a href="contestrank2.php?cid=' . $cid . '">Replay</a>';
-                }
-            }
-            ?>
-        </center>
-        <div style="overflow: auto">
-            <table id=rank>
-                <thead>
-                <tr class=toprow align=center>
-                    <td class="{sorter:'false'}" width=5%>名次
-                    <th width=10%>用户ID</th>
-                    <th width=10%>昵称</th>
-                    <th width=5%>AC</th>
-                    <th width=5%>用时</th>
-                    <?php
-                    for ($i = 0; $i < $pid_cnt; $i++)
-                        echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></td>";
-                    echo "</tr></thead>\n<tbody>";
-                    for ($i = 0; $i < $user_cnt; $i++) {
-                        if ($i & 1) echo "<tr class=oddrow align=center>\n";
-                        else echo "<tr class=evenrow align=center>\n";
-                        echo "<td>";
-                        $uuid = $U[$i]->user_id;
-                        $nick = $U[$i]->nick;
-                        if ($nick[0] != "*")
-                            echo $rank++;
-                        else
-                            echo "*";
-                        $usolved = $U[$i]->solved;
-                        if (isset($_GET['user_id']) && $uuid == $_GET['user_id']) echo "<td bgcolor=#ffff77>";
-                        else echo "<td>";
-                        echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
-                        echo "<td><a href=userinfo.php?user=$uuid>" . htmlentities($U[$i]->nick, ENT_QUOTES, "UTF-8") . "</a>";
-                        echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
-                        echo "<td>" . sec2str($U[$i]->time);
-                        for ($j = 0; $j < $pid_cnt; $j++) {
-                            $bg_color = "eeeeee";
-                            if (isset($U[$i]->p_ac_sec[$j]) && $U[$i]->p_ac_sec[$j] > 0) {
-                                $aa = 0x33 + $U[$i]->p_wa_num[$j] * 32;
-                                $aa = $aa > 0xaa ? 0xaa : $aa;
-                                $aa = dechex($aa);
-                                $bg_color = "$aa" . "ff" . "$aa";
-//$bg_color="aaffaa";
-                                if ($uuid == $first_blood[$j]) {
-                                    $bg_color = "32CD32";//一血颜色
-                                }
-                            } else if (isset($U[$i]->p_wa_num[$j]) && $U[$i]->p_wa_num[$j] > 0) {
-                                $aa = 0xaa - $U[$i]->p_wa_num[$j] * 10;
-                                $aa = $aa > 16 ? $aa : 16;
-                                $aa = dechex($aa);
-                                $bg_color = "ff$aa$aa";
-                            }
-                            echo "<td class=well style='background-color:#$bg_color'>";
-                            if (isset($U[$i])) {
-                                if (isset($U[$i]->p_ac_sec[$j]) && $U[$i]->p_ac_sec[$j] > 0)
-                                    echo sec2str($U[$i]->p_ac_sec[$j]);
-                                if (isset($U[$i]->p_wa_num[$j]) && $U[$i]->p_wa_num[$j] > 0)
-                                    echo "(-" . $U[$i]->p_wa_num[$j] . ")";
-                            }
-                        }
-                        echo "</tr>\n";
+                    if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+                        echo ' | <a href="contestrank3.php?cid=' . $cid . '">滚榜</a>';
                     }
-                    echo "</tbody></table>";
-                    ?>
+                    if ($OJ_MEMCACHE) {
+                        echo '<a href="contestrank2.php?cid=' . $cid . '">Replay</a>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style="overflow: auto">
+                <table id=rank class="table table-sm text-center">
+                    <thead class="thead-light">
+                    <tr class=toprow>
+                        <th class="{sorter:'false'}">名次</th>
+                        <th>用户ID</th>
+                        <th>昵称</th>
+                        <th>AC</th>
+                        <th>用时</th>
+                        <?php
+                        for ($i = 0; $i < $pid_cnt; $i++)
+                            echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></th>";
+                        echo "</tr></thead>\n<tbody>";
+                        for ($i = 0; $i < $user_cnt; $i++) {
+                            if ($i & 1) echo "<tr class=oddrow>\n";
+                            else echo "<tr class=evenrow>\n";
+                            echo "<td>";
+                            $uuid = $U[$i]->user_id;
+                            $nick = $U[$i]->nick;
+                            if ($nick[0] != "*")
+                                echo $rank++;
+                            else
+                                echo "*";
+                            $usolved = $U[$i]->solved;
+                            if (isset($_GET['user_id']) && $uuid == $_GET['user_id']) echo "<td bgcolor=#ffff77>";
+                            else echo "<td>";
+                            echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
+                            echo "<td><a href=userinfo.php?user=$uuid>" . htmlentities($U[$i]->nick, ENT_QUOTES, "UTF-8") . "</a>";
+                            echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
+                            echo "<td>" . sec2str($U[$i]->time);
+                            for ($j = 0; $j < $pid_cnt; $j++) {
+                                $bg_color = "eeeeee";
+                                if (isset($U[$i]->p_ac_sec[$j]) && $U[$i]->p_ac_sec[$j] > 0) {
+                                    $aa = 0x33 + $U[$i]->p_wa_num[$j] * 32;
+                                    $aa = $aa > 0xaa ? 0xaa : $aa;
+                                    $aa = dechex($aa);
+                                    $bg_color = "$aa" . "ff" . "$aa";
+//$bg_color="aaffaa";
+                                    if ($uuid == $first_blood[$j]) {
+                                        $bg_color = "32CD32";//一血颜色
+                                    }
+                                } else if (isset($U[$i]->p_wa_num[$j]) && $U[$i]->p_wa_num[$j] > 0) {
+                                    $aa = 0xaa - $U[$i]->p_wa_num[$j] * 10;
+                                    $aa = $aa > 16 ? $aa : 16;
+                                    $aa = dechex($aa);
+                                    $bg_color = "ff$aa$aa";
+                                }
+                                echo "<td class=well style='background-color:#$bg_color'>";
+                                if (isset($U[$i])) {
+                                    if (isset($U[$i]->p_ac_sec[$j]) && $U[$i]->p_ac_sec[$j] > 0)
+                                        echo sec2str($U[$i]->p_ac_sec[$j]);
+                                    if (isset($U[$i]->p_wa_num[$j]) && $U[$i]->p_wa_num[$j] > 0)
+                                        echo "(-" . $U[$i]->p_wa_num[$j] . ")";
+                                }
+                            }
+                            echo "</tr>\n";
+                        }
+                        echo "</tbody></table>";
+                        ?>
+            </div>
         </div>
     </div>
 
-</div> <!-- /container -->
+    </div>
+</main>
 
 
 <!-- Bootstrap core JavaScript

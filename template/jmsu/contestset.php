@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME ?></title>
+    <title>比赛&作业 | <?php echo $OJ_NAME ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php"); ?>
 
 
@@ -19,72 +19,83 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php"); ?>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <nav class="center">
-            <ul class="pagination d-flex justify-content-center">
-                <li class="page-item"><a class="page-link" href="contest.php?page=1">&lt;&lt;</a></li>
-                <?php
-                if (!isset($page)) $page = 1;
-                $page = intval($page);
-                $section = 8;
-                $start = $page > $section ? $page - $section : 1;
-                $end = $page + $section > $view_total_page ? $view_total_page : $page + $section;
-                for ($i = $start; $i <= $end; $i++) {
-                    echo "<li class='" . ($page == $i ? "active " : "") . "page-item'>
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col">
+                <form method=post action=contest.php>
+                    <?php echo $MSG_SEARCH; ?>:
+                    <input class="input-medium" name=keyword type=text>
+                    <input type=submit>
+                </form>
+            </div>
+            <div class="col">
+                <nav aria-label="Page navigation" class="d-flex justify-content-end">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="contest.php?page=1">&lsaquo;</a></li>
+                        <?php
+                        if (!isset($page)) $page = 1;
+                        $page = intval($page);
+                        $section = 8;
+                        $start = $page > $section ? $page - $section : 1;
+                        $end = $page + $section > $view_total_page ? $view_total_page : $page + $section;
+                        for ($i = $start; $i <= $end; $i++) {
+                            echo "<li class='" . ($page == $i ? "active " : "") . "page-item'>
             <a class='page-link' title='go to page' href='contest.php?page=" . $i . (isset($_GET['my']) ? "&my" : "") . "'>" . $i . "</a></li>";
-                }
-                ?>
-                <li class="page-item"><a class="page-link" href="contest.php?page=<?php echo $view_total_page ?>">&gt;&gt;</a>
-                </li>
-            </ul>
-        </nav>
+                        }
+                        ?>
+                        <li class="page-item"><a class="page-link"
+                                                 href="contest.php?page=<?php echo $view_total_page ?>">&rsaquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
-
-        <center>
-            <form method=post action=contest.php>
-                <?php echo $MSG_SEARCH; ?>
-                <input name=keyword type=text>
-                <input type=submit>
-            </form>
-            ServerTime:<span id=nowdate></span>
-            <table class='table table-striped' width=90%>
-                <thead>
-                <tr class=toprow align=center>
-                    <td width=10%>ID
-                    <td width=50%>Name
-                    <td width=30%>Status
-                    <td width=10%>Private
-                    <td>Creator
-                </tr>
-                </thead>
-                <tbody align='center'>
-                <?php
-                $cnt = 0;
-                foreach ($view_contest as $row) {
-                    if ($cnt)
-                        echo "<tr class='oddrow'>";
-                    else
-                        echo "<tr class='evenrow'>";
-                    foreach ($row as $table_cell) {
-                        echo "<td>";
-                        echo "\t" . $table_cell;
-                        echo "</td>";
+        <div class="row">
+            <div class="col">
+                <table class='table table-striped' width=90%>
+                    <thead>
+                    <tr class=toprow align=center>
+                        <td width=10%>ID
+                        <td width=50%>Name
+                        <td width=30%>Status
+                        <td width=10%>Private
+                        <td>Creator
+                    </tr>
+                    </thead>
+                    <tbody align='center'>
+                    <?php
+                    $cnt = 0;
+                    foreach ($view_contest as $row) {
+                        if ($cnt)
+                            echo "<tr class='oddrow'>";
+                        else
+                            echo "<tr class='evenrow'>";
+                        foreach ($row as $table_cell) {
+                            echo "<td>";
+                            echo "\t" . $table_cell;
+                            echo "</td>";
+                        }
+                        echo "</tr>";
+                        $cnt = 1 - $cnt;
                     }
-                    echo "</tr>";
-                    $cnt = 1 - $cnt;
-                }
-                ?>
-                </tbody>
-            </table>
-        </center>
-    </div>
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-</div> <!-- /container -->
+        <div class="row mb-2 text-center">
+            <div class="col text-muted">当前服务器时间:<span id=nowdate></span></div>
+        </div>
+
+    </div>
+</main>
 
 
 <!-- Bootstrap core JavaScript

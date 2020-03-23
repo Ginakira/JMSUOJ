@@ -42,6 +42,7 @@ if (isset($_GET['cid'])) {
         if (time() < $end_time && stripos($title, "noip")) {
             $view_errors = "<h2> $MSG_NOIP_WARNING <a href=\"contest.php?cid=$cid\">返回比赛</a></h2>";
             require "template/" . $OJ_TEMPLATE . "/error.php";
+            require "oj-footer.php";
             exit(0);
         }
     }
@@ -295,12 +296,14 @@ for ($i = 0; $i < $rows_cnt; $i++) {
 
     }
     $view_status[$i][3] = "<span class='hidden' style='display:none' result='" . $row['result'] . "' ></span>";
-    if (intval($row['result']) == 11 && ((isset($_SESSION[$OJ_NAME . '_' . 'user_id']) && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']))) {
+    if (intval($row['result']) == 11 && ((isset($_SESSION[$OJ_NAME . '_' . 'user_id']) && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']) || isset($_SESSION[$OJ_NAME . '_' . 'administrator']))) {
         $view_status[$i][3] .= "<a href='ceinfo.php?sid=" . $row['solution_id'] . "' class='" . $judge_color[$row['result']] . "'  title='$MSG_Tips'>" . $MSG_Compile_Error . "";
 
         $view_status[$i][3] .= "$mark</a>";
 
-    } else if ((((intval($row['result']) == 8 || intval($row['result']) == 7 || intval($row['result']) == 5 || intval($row['result']) == 6) && ($OJ_SHOW_DIFF || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']))) || $row['result'] == 10 || $row['result'] == 13) && ((isset($_SESSION[$OJ_NAME . '_' . 'user_id']) && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']))) {
+    } else if ((((intval($row['result']) == 8 || intval($row['result']) == 7 || intval($row['result']) == 5 || intval($row['result']) == 6) &&
+                ($OJ_SHOW_DIFF || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']))) || $row['result'] == 10 || $row['result'] == 13) &&
+        ((isset($_SESSION[$OJ_NAME . '_' . 'user_id']) && $row['user_id'] == $_SESSION[$OJ_NAME . '_' . 'user_id']) || isset($_SESSION[$OJ_NAME . '_' . 'source_browser']))) {
         $view_status[$i][3] .= "<a href='reinfo.php?sid=" . $row['solution_id']
             . "' class='" . $judge_color[$row['result']] . "' title='$MSG_Tips'>" . $judge_result[$row['result']] . "";
         $view_status[$i][3] .= "$mark</a>";
@@ -382,8 +385,9 @@ for ($i = 0; $i < $rows_cnt; $i++) {
     } else {
         $view_status[$i][8] = $row['in_date'];
     }
-
-    $view_status[$i][9] = $row['judger'];
+    if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+        $view_status[$i][9] = $row['judger'];
+    }
 
 }
 
@@ -392,10 +396,12 @@ for ($i = 0; $i < $rows_cnt; $i++) {
 <?php
 /////////////////////////Template
 if (isset($_GET['cid'])) {
-    require "template/" . $OJ_TEMPLATE . "/conteststatus.php";
+    require "template/$OJ_TEMPLATE/conteststatus.php";
 } else {
-    require "template/" . $OJ_TEMPLATE . "/status.php";
+    require "template/$OJ_TEMPLATE/status.php";
 }
+
+require "oj-footer.php";
 
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {

@@ -36,7 +36,7 @@ if (!$OJ_BENCHMARK_MODE) {
         $_SESSION[$OJ_NAME . '_' . "vcode"] = null;
         $err_str = $err_str . "Verification Code Wrong!\\n";
         $err_cnt++;
-        require "template/" . $OJ_TEMPLATE . "/error.php";
+        require "template/$OJ_TEMPLATE/error.php";
 
         exit(0);
     }
@@ -71,7 +71,7 @@ if (
     !((isset($cid) && $cid <= 0) || (isset($id) && $id <= 0))
 ) {
     $view_errors = "Where do find this link? No such problem.<br>";
-    require "template/" . $OJ_TEMPLATE . "/error.php";
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 if ($res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
@@ -81,7 +81,7 @@ if ($res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     if (isset($_POST['ajax'])) {
         echo $view_errors;
     } else {
-        require "template/" . $OJ_TEMPLATE . "/error.php";
+        require "template/$OJ_TEMPLATE/error.php";
     }
     exit(0);
 }
@@ -123,7 +123,7 @@ if (isset($_POST['id'])) {
                 !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])
             ) {
                 $view_errors = "You are not invited!\n";
-                require "template/" . $OJ_TEMPLATE . "/error.php";
+                require "template/$OJ_TEMPLATE/error.php";
                 exit(0);
             }
         }
@@ -134,7 +134,7 @@ if (isset($_POST['id'])) {
     $rows_cnt = count($result);
     if ($rows_cnt != 1) {
         $view_errors = "No Such Problem!\n";
-        require "template/" . $OJ_TEMPLATE . "/error.php";
+        require "template/$OJ_TEMPLATE/error.php";
 
         exit(0);
     } else {
@@ -211,12 +211,12 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 }
 if ($len < 2) {
     $view_errors = "Code too short!<br>";
-    require "template/" . $OJ_TEMPLATE . "/error.php";
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 if ($len > 65536) {
     $view_errors = "Code too long!<br>";
-    require "template/" . $OJ_TEMPLATE . "/error.php";
+    require "template/$OJ_TEMPLATE/error.php";
     exit(0);
 }
 
@@ -229,7 +229,7 @@ if (!$OJ_BENCHMARK_MODE) {
     if (count($res) == 1) {
         $view_errors =
             "You should not submit more than twice in 1 seconds.....<br>";
-        require "template/" . $OJ_TEMPLATE . "/error.php";
+        require "template/$OJ_TEMPLATE/error.php";
         exit(0);
     }
 }
@@ -239,8 +239,8 @@ if (~$OJ_LANGMASK & (1 << $language)) {
     $nick = pdo_query($sql, $user_id);
     if ($nick) {
         $nick = $nick[0][0];
-    }else{
-    	$nick = "Guest";
+    } else {
+        $nick = "Guest";
     }
     if (!isset($pid)) {
         $sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,result)
@@ -301,8 +301,8 @@ if (~$OJ_LANGMASK & (1 << $language)) {
     }
 }
 
-if(isset($OJ_UDP)&&$OJ_UDP){
-        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
+if (isset($OJ_UDP) && $OJ_UDP) {
+    send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
 }
 if ($OJ_BENCHMARK_MODE) {
     echo $insert_id;
@@ -350,7 +350,8 @@ if (!$test_run) {
     if (isset($_GET['ajax'])) {
         echo $insert_id;
     } else {
-         ?><script>window.parent.setTimeout("fresh_result('<?php echo $insert_id; ?>')",1000);</script><?php
+        ?>
+        <script>window.parent.setTimeout("fresh_result('<?php echo $insert_id; ?>')", 1000);</script><?php
     }
 }
 ?>

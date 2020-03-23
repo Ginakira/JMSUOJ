@@ -18,6 +18,7 @@ if (isset($OJ_ON_SITE_CONTEST_ID)) {
 //$view_news = "";
 $news_list = "";
 $news_modals = "";
+$view_news = "";
 $sql = "select * "
     . "FROM `news` "
     . "WHERE `defunct`!='Y'"
@@ -76,6 +77,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
 
 /////////////////////////Template
 require "template/$OJ_TEMPLATE/index.php";
+require "oj-footer.php";
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';

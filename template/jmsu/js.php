@@ -25,19 +25,10 @@ or
 -->
 <script>
     $(document).ready(function () {
-        const msg = "<marquee style='margin-top:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'" +
-            " onMouseOut='this.start()' class=toprow>" +
-            <?php echo json_encode($view_marquee_msg); ?> +"</marquee>";
-        $(".jumbotron").prepend(msg);
+        const msg = <?php echo json_encode($view_marquee_msg); ?> +"";
+        $("main > .container").prepend(msg);
         $("form").append("<div id='csrf' />");
         $("#csrf").load("<?php echo $path_fix?>csrf.php");
-        $("body").append("\
-            <div class=center> <img src='../../image/logo-jmsu.png' width='254' alt='JMSU-ACM logo'></div>\
-            <footer class='text-center text-muted py-4 small'>\
-            开发/维护：<a href='https://github.com/Ginakira/JMSUOJ'>AutoWA Team</a> &ensp;基于开源项目HUSTOJ<br>\
-            Copyright © 2019-" + (new Date()).getFullYear() + " AutoWA Team All Rights Reserved.<br>\
-            备案号：<a href='http://www.beian.miit.gov.cn/'>黑ICP备19006251号-1</a> \
-            </footer>");
         <?php
         if (isset($_SESSION[$OJ_NAME . "_administrator"])) {
             echo "admin_mod();";

@@ -1,1 +1,3 @@
-<span>JMSU OnlineJudge开放测试中 如在使用中出现问题请查看首页公告与管理员联系</span><br />
+<div class="alert alert-danger alert-dismissible fade show text-center">
+            JMSU OnlineJudge提醒您：<b>勤洗手 不聚众 开窗通风 正确佩戴口罩 注意个人卫生</b> 论坛开放注册中！ <a class="alert-link" href="https://bbs.jmsu.xyz/">点击访问</a>
+        </div>

@@ -41,7 +41,7 @@ if ($login) {
     echo "</script>";
 } else {
     if ($view_errors) {
-        require("template/$OJ_TEMPLATE/error.php");
+        require "template/$OJ_TEMPLATE/error.php";
     } else {
         echo "<script language='javascript'>\n";
         echo "alert('用户名或密码错误!');\n";

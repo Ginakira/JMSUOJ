@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>
-        <?php echo $OJ_NAME ?>
+        问题统计 | <?php echo $OJ_NAME ?>
     </title>
     <?php include "template/$OJ_TEMPLATE/css.php"; ?>
 
@@ -22,152 +22,140 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h2 class="text-center">Problem <?php echo $id ?> 统计数据</h2>
-        <center>
-            <table class="table-sm table-bordered">
-                <tr>
-                    <td>
-                        <table id='statics'>
-                            <?php
-                            $cnt = 0;
-                            foreach ($view_problem as $row) {
-                                if ($cnt) {
-                                    echo "<tr class='oddrow'>";
-                                } else {
-                                    echo "<tr class='evenrow'>";
-                                }
-
-                                foreach ($row as $table_cell) {
-                                    echo "<td>";
-                                    echo "\t" . $table_cell;
-                                    echo "</td>";
-                                }
-                                echo "</tr>";
-                                $cnt = 1 - $cnt;
-                            }
-                            ?>
-                            <tr id=pie bgcolor=white>
-                                <td colspan=2>
-                                    <div id='PieDiv' style='position:relative;height:150px;width:200px;'></div>
-                            </tr>
-                        </table>
-                        <br>
-                        <?php if (isset($view_recommand)) { ?>
-                            <table id=recommand>
-                                <tr>
-                                    <td>
-                                        推荐的相关题目<br>
-                                        <?php
-                                        $cnt = 1;
-                                        foreach ($view_recommand as $row) {
-                                            echo "<a href=problem.php?id=$row[0]>$row[0]</a>&nbsp;";
-                                            if ($cnt % 3 == 0) {
-                                                echo "<br>";
-                                            }
-
-                                            $cnt++;
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="text-center">Problem <?php echo $id ?> 统计数据</h2>
+                <center>
+                    <table class="table-sm table-bordered">
+                        <tr>
+                            <td>
+                                <table id='statics'>
+                                    <?php
+                                    $cnt = 0;
+                                    foreach ($view_problem as $row) {
+                                        if ($cnt) {
+                                            echo "<tr class='oddrow'>";
+                                        } else {
+                                            echo "<tr class='evenrow'>";
                                         }
-                                        ?>
-                                    </td>
-                                </tr>
-                            </table>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <table id=problemstatus style="margin-bottom:10px">
-                            <thead>
-                            <tr class=toprow>
-                                <th style="cursor:hand" onclick="sortTable('problemstatus', 0, 'int');">
-                                    <?php echo $MSG_Number ?>
-                                <th>RunID
-                                <th>
-                                    <?php echo $MSG_USER ?>
-                                <th>
-                                    <?php echo $MSG_MEMORY ?>
-                                <th>
-                                    <?php echo $MSG_TIME ?>
-                                <th>
-                                    <?php echo $MSG_LANG ?>
-                                <th>
-                                    <?php echo $MSG_CODE_LENGTH ?>
-                                <th>
-                                    <?php echo $MSG_SUBMIT_TIME ?>
-                                </th>
-                                </th>
-                                </th>
-                                </th>
-                                </th>
-                                </th>
-                                </th>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $cnt = 0;
-                            foreach ($view_solution as $row) {
-                                if ($cnt) {
-                                    echo "<tr class='oddrow'>";
-                                } else {
-                                    echo "<tr class='evenrow'>";
-                                }
 
-                                foreach ($row as $table_cell) {
-                                    echo "<td>";
-                                    echo "\t" . $table_cell;
-                                    echo "</td>";
+                                        foreach ($row as $table_cell) {
+                                            echo "<td>";
+                                            echo "\t" . $table_cell;
+                                            echo "</td>";
+                                        }
+                                        echo "</tr>";
+                                        $cnt = 1 - $cnt;
+                                    }
+                                    ?>
+                                    <tr id=pie bgcolor=white>
+                                        <td colspan=2>
+                                            <div id='PieDiv' style='position:relative;height:150px;width:200px;'></div>
+                                    </tr>
+                                </table>
+                                <br>
+                                <?php if (isset($view_recommand)) { ?>
+                                    <table id=recommand>
+                                        <tr>
+                                            <td>
+                                                推荐的相关题目<br>
+                                                <?php
+                                                $cnt = 1;
+                                                foreach ($view_recommand as $row) {
+                                                    echo "<a href=problem.php?id=$row[0]>$row[0]</a>&nbsp;";
+                                                    if ($cnt % 3 == 0) {
+                                                        echo "<br>";
+                                                    }
+
+                                                    $cnt++;
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <table id=problemstatus class="table" style="margin-bottom:10px">
+                                    <thead class="thead-light">
+                                    <tr class=toprow>
+                                        <th style="cursor:pointer"
+                                            onclick="sortTable('problemstatus', 0, 'int');"><?php echo $MSG_Number ?></th>
+                                        <th>RunID</th>
+                                        <th><?php echo $MSG_USER ?></th>
+                                        <th><?php echo $MSG_MEMORY ?></th>
+                                        <th><?php echo $MSG_TIME ?></th>
+                                        <th><?php echo $MSG_LANG ?></th>
+                                        <th><?php echo $MSG_CODE_LENGTH ?></th>
+                                        <th><?php echo $MSG_SUBMIT_TIME ?></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $cnt = 0;
+                                    foreach ($view_solution as $row) {
+                                        if ($cnt) {
+                                            echo "<tr class='oddrow'>";
+                                        } else {
+                                            echo "<tr class='evenrow'>";
+                                        }
+
+                                        foreach ($row as $table_cell) {
+                                            echo "<td>";
+                                            echo "\t" . $table_cell;
+                                            echo "</td>";
+                                        }
+                                        echo "</tr>";
+                                        $cnt = 1 - $cnt;
+                                    }
+                                    ?>
+                                </table>
+                                <?php
+                                echo "<a class='btn btn-light' href='problemstatus.php?id=$id'>TOP</a>";
+                                echo "&nbsp;&nbsp;<a class='btn btn-light' href='status.php?problem_id=$id'>提交记录</a>";
+                                if ($page > $pagemin) {
+                                    $page--;
+                                    echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[PREV]</a>";
+                                    $page++;
                                 }
-                                echo "</tr>";
-                                $cnt = 1 - $cnt;
-                            }
-                            ?>
-                        </table>
-                        <?php
-                        echo "<a class='btn btn-light' href='problemstatus.php?id=$id'>TOP</a>";
-                        echo "&nbsp;&nbsp;<a class='btn btn-light' href='status.php?problem_id=$id'>提交记录</a>";
-                        if ($page > $pagemin) {
-                            $page--;
-                            echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[PREV]</a>";
-                            $page++;
+                                if ($page < $pagemax) {
+                                    $page++;
+                                    echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[NEXT]</a>";
+                                    $page--;
+                                }
+                                ?>
+                    </table>
+                    <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
+                    <script type="text/javascript" src="include/pie.js"></script>
+                    <script language="javascript">
+                        var y = new Array();
+                        var x = new Array();
+                        var dt = document.getElementById("statics");
+                        var data = dt.rows;
+                        var n;
+                        for (var i = 3; dt.rows[i].id != "pie"; i++) {
+                            x.push(dt.rows[i].cells[0].innerHTML);
+                            n = dt.rows[i].cells[1];
+                            n = n.innerText || n.textContent;
+                            //alert(n);
+                            n = parseInt(n);
+                            y.push(n);
                         }
-                        if ($page < $pagemax) {
-                            $page++;
-                            echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[NEXT]</a>";
-                            $page--;
-                        }
-                        ?>
-            </table>
-            <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
-            <script type="text/javascript" src="include/pie.js"></script>
-            <script language="javascript">
-                var y = new Array();
-                var x = new Array();
-                var dt = document.getElementById("statics");
-                var data = dt.rows;
-                var n;
-                for (var i = 3; dt.rows[i].id != "pie"; i++) {
-                    x.push(dt.rows[i].cells[0].innerHTML);
-                    n = dt.rows[i].cells[1];
-                    n = n.innerText || n.textContent;
-                    //alert(n);
-                    n = parseInt(n);
-                    y.push(n);
-                }
-                var mypie = new Pie("PieDiv");
-                mypie.drawPie(y, x);
-                //mypie.clearPie();
-            </script>
+                        var mypie = new Pie("PieDiv");
+                        mypie.drawPie(y, x);
+                        //mypie.clearPie();
+                    </script>
+            </div>
+        </div>
 
     </div>
-
-</div>
-<!-- /container -->
+</main>
 
 
 <!-- Bootstrap core JavaScript

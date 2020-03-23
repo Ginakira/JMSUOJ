@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME ?></title>
+    <title>评测信息 | <?php echo $OJ_NAME ?></title>
     <?php include "template/$OJ_TEMPLATE/css.php"; ?>
 
 
@@ -20,54 +20,72 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<div class="container">
-    <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="alert alert-info alert-dismissible text-center fade show">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>提示</strong>：当答案错误时，左侧数据为期待的<strong>正确输出</strong>，右侧数据为您的代码运行的<strong>实际输出</strong>
+<?php include "template/$OJ_TEMPLATE/nav.php"; ?>
+<main role="main" class="flex-shrink-0">
+    <div class="container mb-4">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info alert-dismissible text-center fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>提示</strong>：当答案错误时，左侧数据为期待的<strong>正确输出</strong>，右侧数据为您的代码运行的<strong>实际输出</strong>
+                </div>
+            </div>
         </div>
-        <table class="table table-bordered table-sm text-center">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">提交ID</th>
-                <th scope="col">题目编号</th>
-                <th scope="col">提交者</th>
-                <th scope="col">得分</th>
-                <th scope="col">耗时</th>
-                <th scope="col">内存</th>
-                <th scope="col">代码长度</th>
-                <th scope="col">评测时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">#<?php echo $solution_info['sid']; ?></th>
-                <td>
-                    <a href="problem.php?id=<?php echo $solution_info['pid']; ?>"><?php echo $solution_info['pid']; ?></a>
-                </td>
-                <td>
-                    <a href="
+        <div class="row">
+            <div class="col">
+                <table class="table table-bordered table-sm text-center">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">提交ID</th>
+                        <th scope="col">题目编号</th>
+                        <th scope="col">提交者</th>
+                        <th scope="col">得分</th>
+                        <th scope="col">耗时</th>
+                        <th scope="col">内存</th>
+                        <th scope="col">代码长度</th>
+                        <th scope="col">评测时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">#<?php echo $solution_info['sid']; ?></th>
+                        <td>
+                            <a href="problem.php?id=<?php echo $solution_info['pid']; ?>"><?php echo $solution_info['pid']; ?></a>
+                        </td>
+                        <td>
+                            <a href="
                        userinfo.php?user=<?php echo $solution_info['uid']; ?>"> <?php echo $solution_info['uid']; ?></a>
-                </td>
-                <td class=" text-<?php echo $solution_info['score'] == 100 ? "success" : "danger"; ?>">
-                    <strong><?php echo $solution_info['score']; ?></strong></td>
-                <td><?php echo $solution_info['time']; ?>ms</td>
-                <td><?php echo $solution_info['memory']; ?>kB</td>
-                <td><?php echo $solution_info['length']; ?>B</td>
-                <td><?php echo $solution_info['date']; ?></td>
-            </tr>
-            </tbody>
-        </table>
-        <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo ?></pre>
-        <div id='errexp'>Explain:</div>
+                        </td>
+                        <td class=" text-<?php echo $solution_info['score'] == 100 ? "success" : "danger"; ?>">
+                            <strong><?php echo $solution_info['score']; ?></strong></td>
+                        <td><?php echo $solution_info['time']; ?>ms</td>
+                        <td><?php echo $solution_info['memory']; ?>kB</td>
+                        <td><?php echo $solution_info['length']; ?>B</td>
+                        <td><?php echo $solution_info['date']; ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo ?></pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">辅助解释</div>
+                    <div id='errexp' class="card-body"></div>
+                </div>
+            </div>
+        </div>
 
     </div>
-
-</div> <!-- /container -->
+</main>
 
 
 <!-- Bootstrap core JavaScript
@@ -96,7 +114,7 @@
     function explain() {
         //alert("asdf");
         let errmsg = $("#errtxt").text();
-        let expmsg = "辅助解释：<br><hr>";
+        let expmsg = "";
         for (let i = 0; i < pats.length; i++) {
             let pat = pats[i];
             let exp = exps[i];

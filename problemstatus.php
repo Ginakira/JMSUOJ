@@ -210,7 +210,8 @@ if (isset($_GET['id'])) {
 }
 
 /////////////////////////Template
-require "template/" . $OJ_TEMPLATE . "/problemstatus.php";
+require "template/$OJ_TEMPLATE/problemstatus.php";
+require "oj-footer.php";
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php')) {
     require_once './include/cache_end.php';

@@ -4,7 +4,7 @@ ob_end_clean();
 require_once("../lang/$OJ_LANG.php");
 ?>
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,10 +24,10 @@ require_once("../lang/$OJ_LANG.php");
     <![endif]-->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
+<?php include("template/$OJ_TEMPLATE/nav.php"); ?>
 <div class="container">
-    <?php include("../template/$OJ_TEMPLATE/nav.php"); ?>
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <?php echo $view_discuss ?>
