@@ -29,24 +29,6 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form class=form-inline action=problem.php>
-                    <input class="form-control search-query" type='text' name='id' placeholder="题目编号"
-                           aria-label="Problem ID">
-                    <button class="form-control btn btn-outline-primary ml-2" type='submit'>Go</button>
-                </form>
-            </div>
-
-            <div class="col">
-                <form class="form-search form-inline">
-                    <input type="text" name=search class="form-control search-query"
-                           placeholder="题目关键字/标签" aria-label="Keyword/Tag">
-                    <button type="submit" class="form-control btn btn-outline-primary ml-2">
-                        <?php echo $MSG_SEARCH ?>
-                    </button>
-                </form>
-            </div>
-
-            <div class="col">
                 <nav aria-label="Page navigation" class="d-flex justify-content-center">
                     <ul class="pagination">
                         <li class="page-item">
@@ -67,12 +49,42 @@
                         }
                         ?>
                         <li class="page-item">
-                            <a class="page-link" href="problemset.php?page=<?php echo $view_total_page ?>">&raquo;</a>
+                            <a class="page-link"
+                               href="problemset.php?page=<?php echo $view_total_page ?>">&raquo;</a>
                         </li>
                     </ul>
                 </nav>
             </div>
-
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <form action=problem.php>
+                    <div class="row">
+                        <div class="col input-group">
+                            <input class="form-control search-query" type='text' name='id' placeholder="题目编号"
+                                   aria-label="Problem ID">
+                            <div class="input-group-append">
+                                <button class="form-control btn btn-outline-primary" type='submit'>Go</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <form class="form-search">
+                    <div class="row">
+                        <div class="col input-group">
+                            <input type="text" name=search class="form-control search-query"
+                                   placeholder="关键字/标签" aria-label="Keyword/Tag">
+                            <div class="input-group-append">
+                                <button type="submit" class="form-control btn btn-outline-primary">
+                                    <?php echo $MSG_SEARCH ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="row">
             <table id='problemset' class='table text-center table-bordered table-hover'>
@@ -94,8 +106,8 @@
                     <th>
                         <?php echo $MSG_TITLE ?>
                     </th>
-                    <th>通过率</th>
-                    <th>
+                    <th class="d-none d-lg-table-cell">通过率</th>
+                    <th class="d-none d-lg-table-cell">
                         <?php echo $MSG_SOURCE ?>
                     </th>
                     <th>
@@ -118,8 +130,8 @@
 
                     $i = 0;
                     foreach ($row as $table_cell) {
-                        if ($i == 1 || $i == 3) {
-                            echo "<td>";
+                        if ($i == 3 || $i == 4) {
+                            echo "<td class='d-none d-lg-table-cell'>";
                         } else {
                             echo "<td>";
                         }
