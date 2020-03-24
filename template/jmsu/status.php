@@ -147,19 +147,19 @@
                         <th>
                             <?php echo $MSG_RESULT ?>
                         </th>
-                        <th class='hidden-xs'>
+                        <th class='d-none d-md-table-cell'>
                             <?php echo $MSG_MEMORY . "(KB)" ?>
                         </th>
-                        <th class='hidden-xs'>
+                        <th class='d-none d-md-table-cell'>
                             <?php echo $MSG_TIME . "(MS)" ?>
                         </th>
-                        <th>
+                        <th class='d-none d-md-table-cell'>
                             <?php echo $MSG_LANG ?>
                         </th>
-                        <th class='hidden-xs'>
+                        <th class='d-none d-md-table-cell'>
                             <?php echo $MSG_CODE_LENGTH ?>
                         </th>
-                        <th>
+                        <th class='d-none d-md-table-cell'>
                             <?php echo $MSG_SUBMIT_TIME ?>
                         </th>
                         <?php if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
@@ -179,8 +179,8 @@
 
                         $i = 0;
                         foreach ($row as $table_cell) {
-                            if ($i > 3 && $i != 8 && $i != 6) {
-                                echo "<td class='hidden-xs'>";
+                            if ($i >= 4) {
+                                echo "<td class='d-none d-md-table-cell'>";
                             } else {
                                 echo "<td>";
                             }
