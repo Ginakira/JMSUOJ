@@ -27,30 +27,33 @@
 <main role="main" class="flex-shrink-0">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="container">
-
-        <div class="col">
-            <!-- 提交数统计图表-->
-            <div class="m-auto" style="text-align: center;"> 最近提交 :
-                <?php echo $speed ?>
-                <div id=submission class="m-auto" style="width:80%;height:300px;text-align: center"></div>
+        <div class="row">
+            <div class="col">
+                <!-- 提交数统计图表-->
+                <div class="m-auto" style="text-align: center;"> 最近提交 :
+                    <?php echo $speed ?>
+                    <div id=submission class="m-auto" style="width:80%;height:300px;text-align: center"></div>
+                </div>
+                <br>
             </div>
-            <br>
         </div>
         <!--公告以列表形式 + bs4模态框展现-->
-        <div class="col">
-            <div class="card" style="width:80%;margin:0 auto; border: 1px solid #0f4c81;">
-                <div class="card-header text-white" style="background-color: #0f4c81">公告</div>
-                <div class="card-body">
-                    <table class="table table-responsive">
-                        <colgroup>
-                            <col style="width:55%">
-                            <col style="width:35%">
-                            <col style="width:10%">
-                        </colgroup>
-                        <tbody>
-                        <?php echo $news_list; ?>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width:80%;margin:0 auto; border: 1px solid #0f4c81;">
+                    <div class="card-header text-white" style="background-color: #0f4c81">公告</div>
+                    <div class="card-body">
+                        <table class="table table-responsive">
+                            <colgroup>
+                                <col style="width:55%">
+                                <col style="width:35%">
+                                <col style="width:10%">
+                            </colgroup>
+                            <tbody>
+                            <?php echo $news_list; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
