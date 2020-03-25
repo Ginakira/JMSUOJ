@@ -19,11 +19,11 @@ if (isset($OJ_ON_SITE_CONTEST_ID)) {
 $news_list = "";
 $news_modals = "";
 $view_news = "";
-$sql = "select * "
-    . "FROM `news` "
-    . "WHERE `defunct`!='Y'"
-    . "ORDER BY `importance` ASC,`time` DESC "
-    . "LIMIT 50";
+$sql = "SELECT * 
+        FROM `news`
+        WHERE `defunct`!='Y'
+        ORDER BY `importance` ASC,`time` DESC 
+        LIMIT 50";
 $result = mysql_query_cache($sql); //mysql_escape_string($sql));
 if (!$result) {
     $view_news = "<h3>暂无公告!</h3>";
@@ -46,24 +46,39 @@ if (!$result) {
 }
 $view_apc_info = "";
 
-$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 8000) solution  where result<13 group by md order by md desc limit 200";
+$sql = "SELECT date(in_date) AS md, count(1) AS c
+        FROM (SELECT * FROM solution ORDER BY solution_id DESC LIMIT 8000) solution
+        WHERE result < 13
+        GROUP BY md
+        ORDER BY md
+        LIMIT 200";
 $result = mysql_query_cache($sql); //mysql_escape_string($sql));
-$chart_data_all = array();
-//echo $sql;
+
+$chart_data_all = array(); // 用于生成图表数据的二维数组 [[日期，总提交数，AC数], ...]
 
 foreach ($result as $row) {
     array_push($chart_data_all, array($row['md'], $row['c']));
 }
 
-$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * from solution order by solution_id desc limit 8000) solution where result=4 group by md order by md desc limit 200";
-$result = mysql_query_cache($sql); //mysql_escape_string($sql));
-$chart_data_ac = array();
-//echo $sql;
 
+$sql = "SELECT date(in_date) AS md, count(1) AS c
+        FROM (SELECT * FROM solution ORDER BY solution_id DESC LIMIT 8000) solution
+        WHERE result = 4
+        GROUP BY md
+        ORDER BY md
+        LIMIT 200";
+$result = mysql_query_cache($sql); //mysql_escape_string($sql));
+
+$cnt = 0; // 临时计数器
 foreach ($result as $row) {
-    array_push($chart_data_ac, array($row['md'], $row['c']));
+    while ($row['md'] != $chart_data_all[$cnt][0]) {
+        // 筛选AC数量，如果本条AC记录与对应的总提交天数不一致，则代表没有AC，push-0
+        array_push($chart_data_all[$cnt++], "0");
+    }
+    array_push($chart_data_all[$cnt++], $row['c']);
 }
 
+/*
 $speed = 0;
 if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     $sql = "select avg(sp) sp from (select  avg(1) sp,judgetime from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 60 * 60) order by sp) tt;";
@@ -74,6 +89,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
         $speed = ($chart_data_all[0][1] ? $chart_data_all[0][1] : 0) . '/天';
     }
 }
+*/
 
 /////////////////////////Template
 require "template/$OJ_TEMPLATE/index.php";
