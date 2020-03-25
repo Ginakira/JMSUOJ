@@ -33,7 +33,7 @@ if (!$result) {
     foreach ($result as $row) {
         $news_list .= "<tr><td><a href='#' data-toggle='modal' data-target='#news" . $cnt_id . "'>" . $row['title'] . "</a></td>" .
             "<td class='small'>" . $row['time'] . "</td>" .
-            "<td><span class='badge badge-secondary'>" . $row['user_id'] . "</span></td></tr>";
+            "<td><span class='badge badge-success'>" . $row['user_id'] . "</span></td></tr>";
         $news_modals .= "<div class='modal fade' id='news" . $cnt_id . "'>"; //模态框id
         //模态框头部&标题
         $news_modals .= "<div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>" . $row['title'] . "</h4>-<small>" . $row['user_id'] . "</small><button type='button' class='close' data-dismiss='modal'>&times;</button></div>";

@@ -26,7 +26,7 @@
 <?php include "template/$OJ_TEMPLATE/nav.php"; ?>
 <main role="main" class="flex-shrink-0">
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="container">
+    <div class="container mb-4">
         <div class="row">
             <div class="col">
                 <div id="main" style="height:400px;"></div>
