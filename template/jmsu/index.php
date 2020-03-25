@@ -29,12 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <!-- 提交数统计图表-->
-                <div class="m-auto" style="text-align: center;"> 最近提交 :
-                    <?php echo $speed ?>
-                    <div id=submission class="m-auto" style="width:80%;height:300px;text-align: center"></div>
-                </div>
-                <br>
+                <div id="main" style="height:400px;"></div>
             </div>
         </div>
         <!--公告以列表形式 + bs4模态框展现-->
@@ -70,35 +65,57 @@
 <?php include "template/$OJ_TEMPLATE/js.php"; ?>
 <script type="text/javascript" src="<?php echo $OJ_CDN_URL ?>include/jquery.flot.js"></script>
 <script type="text/javascript">
-    $(function () {
-        let d1 = <?php echo json_encode($chart_data_all) ?>;
-        let d2 = <?php echo json_encode($chart_data_ac) ?>;
-        $.plot($("#submission"), [{
-            label: "<?php echo $MSG_SUBMIT ?>",
-            data: d1,
-            lines: {
-                show: true
-            }
-        }, {
-            label: "<?php echo $MSG_AC ?>",
-            data: d2,
-            bars: {
-                show: true
-            }
-        }], {
-            grid: {
-                backgroundColor: {
-                    colors: ["#f5f5f5", "#f5f5f5"]
-                }
+    let data_all = <?php echo json_encode($chart_data_all) ?>;
+    let myChart = echarts.init(document.getElementById('main'));
+    // 绘制图表
+    let option = {
+            legend: {
+                left: 'right',
             },
-            xaxis: {
-                mode: "time" //,
-                //max:(new Date()).getTime(),
-                //min:(new Date()).getTime()-100*24*3600*1000
-            }
-        });
-    });
-    //alert((new Date()).getTime());
+            tooltip: {
+                trigger: 'axis',
+            },
+
+            dataset: {
+                source: data_all,
+            },
+            title: {
+                left: 'center',
+                text: '最近提交',
+            },
+            xAxis: {
+                type: 'category',
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '提交数',
+                    type: 'line',
+                    smooth: 'true',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: '#fad157',
+                    },
+                    areaStyle: {
+                        color: '#fad284',
+                    },
+                },
+                {
+                    name: 'AC数',
+                    type: 'line',
+                    smooth: 'true',
+                    sampling: 'average',
+                    itemStyle: {
+                        color: '#8beeb9',
+                    },
+                    areaStyle: {
+                        color: '#a9eec2',
+                    },
+                },
+            ]
+        }
+    ;
+    myChart.setOption(option);
 </script>
 </body>
 </html>
