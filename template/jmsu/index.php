@@ -63,7 +63,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include "template/$OJ_TEMPLATE/js.php"; ?>
-<script type="text/javascript" src="<?php echo $OJ_CDN_URL ?>include/jquery.flot.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
 <script type="text/javascript">
     let data_all = <?php echo json_encode($chart_data_all) ?>;
     let myChart = echarts.init(document.getElementById('main'));
