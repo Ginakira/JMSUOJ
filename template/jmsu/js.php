@@ -1,7 +1,7 @@
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>jquery.min.js"></script>
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>popper.min.js"></script>
-<script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>echarts.min.js"></script>
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/bootstrap/js/" ?>bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
 
 <?php
 if (file_exists("./admin/msg.txt")) {
