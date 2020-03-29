@@ -36,7 +36,9 @@
         <div class="row">
             <div class="col">
                 <div class="card" style="width:80%;margin:0 auto; border: 1px solid #0f4c81;">
-                    <div class="card-header text-white" style="background-color: #0f4c81">公告</div>
+                    <div class="card-header text-white" style="background-color: #0f4c81">
+                        <i class="fas fa-bullhorn"></i> 公告
+                    </div>
                     <div class="card-body">
                         <table class="table table-responsive">
                             <colgroup>
