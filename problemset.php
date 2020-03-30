@@ -125,7 +125,7 @@ foreach ($result as $row) {
     $view_problemset[$i][1] = "<div fd='problem_id' class='center'>" . $row['problem_id'] . "</div>";
     $view_problemset[$i][2] = "<div class='left'><a href='problem.php?id=" . $row['problem_id'] . "'>" . $row['title'] . "</a></div>";
     //3号 通过率显示进度条 使用bootstrap4样式
-    $pass_percent = round($row['accepted'] / ($row['accepted'] + $row['submit']) * 100);
+    $pass_percent = round($row['accepted'] / $row['submit'] * 100);
     $view_problemset[$i][3] = "<div class='progress' style='margin:0 10px 0 10px;height:20px'><div class='progress-bar bg-success' style='width:" . $pass_percent . "%'>" . $pass_percent . "%</div></div>";
     $view_problemset[$i][4] = "<div pid='" . $row['problem_id'] . "' fd='source' class='center'>";
     foreach ($category as $cat) {
