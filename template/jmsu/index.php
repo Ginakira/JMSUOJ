@@ -68,6 +68,7 @@
 <script src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
 <script type="text/javascript">
     let data_all = <?php echo json_encode($chart_data_all) ?>;
+    data_all = data_all.slice(-30); // 只取最后30天记录 SQL查询未优化
     let myChart = echarts.init(document.getElementById('main'));
     // 绘制图表
     let option = {
