@@ -277,7 +277,7 @@
         }
 
         if (success) {
-            alert("The text is on the clipboard, try to paste it!");
+            alert("复制成功!");
         } else {
             alert("Your browser doesn't allow clipboard access!");
         }

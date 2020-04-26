@@ -1,5 +1,4 @@
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>jquery.min.js"></script>
-<script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/" ?>popper.min.js"></script>
 <script src="<?php echo $OJ_CDN_URL . $path_fix . "template/$OJ_TEMPLATE/bootstrap/js/" ?>bootstrap.min.js"></script>
 
 <?php
