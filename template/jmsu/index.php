@@ -65,7 +65,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include "template/$OJ_TEMPLATE/js.php"; ?>
-<script src="https://cdn.bootcss.com/echarts/4.7.0/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
 <script type="text/javascript">
     let data_all = <?php echo json_encode($chart_data_all) ?>;
     data_all = data_all.slice(-30); // 只取最后30天记录 SQL查询未优化

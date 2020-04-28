@@ -54,9 +54,10 @@
                                         $cnt = 1 - $cnt;
                                     }
                                     ?>
-                                    <tr id=pie bgcolor=white>
+                                    <tr id="pie" bgcolor=white>
                                         <td colspan=2>
-                                            <div id='PieDiv' style='position:relative;height:150px;width:200px;'></div>
+                                            <div id="chartDiv"
+                                                 style="position:relative;width: 200px;height:150px;"></div>
                                     </tr>
                                 </table>
                                 <br>
@@ -131,25 +132,57 @@
                                 }
                                 ?>
                     </table>
-                    <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
-                    <script type="text/javascript" src="include/pie.js"></script>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
                     <script language="javascript">
-                        var y = new Array();
-                        var x = new Array();
-                        var dt = document.getElementById("statics");
-                        var data = dt.rows;
-                        var n;
-                        for (var i = 3; dt.rows[i].id != "pie"; i++) {
-                            x.push(dt.rows[i].cells[0].innerHTML);
-                            n = dt.rows[i].cells[1];
-                            n = n.innerText || n.textContent;
-                            //alert(n);
-                            n = parseInt(n);
-                            y.push(n);
+                        let dt = document.getElementById("statics");
+                        let data = [];
+                        let labels = [];
+                        for (var i = 3; dt.rows[i].id !== "pie"; i++) {
+                            labels.push(dt.rows[i].cells[0].innerText);
+                            data.push({
+                                'name': dt.rows[i].cells[0].innerText,
+                                'value': dt.rows[i].cells[1].innerText,
+                            });
                         }
-                        var mypie = new Pie("PieDiv");
-                        mypie.drawPie(y, x);
-                        //mypie.clearPie();
+
+                        let myChart = echarts.init(document.getElementById('chartDiv'));
+                        let options = {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 0,
+                                data: labels,
+                            },
+                            series: [
+                                {
+                                    name: '提交统计',
+                                    type: 'pie',
+                                    radius: ['50%', '70%'],
+                                    center: ['70%', '50%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true,
+                                            fontSize: '30',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    labelLine: {
+                                        show: false
+                                    },
+                                    data: data,
+                                }
+                            ]
+                        };
+                        myChart.setOption(options);
                     </script>
             </div>
         </div>
