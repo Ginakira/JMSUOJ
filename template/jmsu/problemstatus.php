@@ -31,7 +31,7 @@
         <div class="row mb-4">
             <div class="col">
                 <h2 class="text-center">Problem <?php echo $id ?> 统计数据</h2>
-                <center>
+                <div style="text-align: center;">
                     <table class="table-sm table-bordered">
                         <tr>
                             <td>
@@ -132,58 +132,7 @@
                                 }
                                 ?>
                     </table>
-                    
-                    <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
-                    <script language="javascript">
-                        let dt = document.getElementById("statics");
-                        let data = [];
-                        let labels = [];
-                        for (var i = 3; dt.rows[i].id !== "pie"; i++) {
-                            labels.push(dt.rows[i].cells[0].innerText);
-                            data.push({
-                                'name': dt.rows[i].cells[0].innerText,
-                                'value': dt.rows[i].cells[1].innerText,
-                            });
-                        }
-
-                        let myChart = echarts.init(document.getElementById('chartDiv'));
-                        let options = {
-                            tooltip: {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                            },
-                            legend: {
-                                orient: 'vertical',
-                                left: 0,
-                                data: labels,
-                            },
-                            series: [
-                                {
-                                    name: '提交统计',
-                                    type: 'pie',
-                                    radius: ['50%', '70%'],
-                                    center: ['70%', '50%'],
-                                    avoidLabelOverlap: false,
-                                    label: {
-                                        show: false,
-                                        position: 'center'
-                                    },
-                                    emphasis: {
-                                        label: {
-                                            show: true,
-                                            fontSize: '30',
-                                            fontWeight: 'bold'
-                                        }
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    },
-                                    data: data,
-                                }
-                            ]
-                        };
-                        myChart.setOption(options);
-                    </script>
+                </div>
             </div>
         </div>
 
@@ -202,5 +151,57 @@
     });
 </script>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
+<script language="javascript">
+    let dt = document.getElementById("statics");
+    let data = [];
+    let labels = [];
+    for (var i = 3; dt.rows[i].id !== "pie"; i++) {
+        labels.push(dt.rows[i].cells[0].innerText);
+        data.push({
+            'name': dt.rows[i].cells[0].innerText,
+            'value': dt.rows[i].cells[1].innerText,
+        });
+    }
+
+    let myChart = echarts.init(document.getElementById('chartDiv'));
+    let options = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 0,
+            data: labels,
+        },
+        series: [
+            {
+                name: '提交统计',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                center: ['70%', '50%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '15',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: data,
+            }
+        ]
+    };
+    myChart.setOption(options);
+</script>
 
 </html>
