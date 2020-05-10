@@ -134,7 +134,7 @@
                             <td align=right width=65%>
                                 <a href="https://github.com/Ginakira/JMSUOJ"><font color=red><?php echo $OJ_NAME ?>
                                         Update
-                                        Time:20200325</font></a></td>
+                                        Time:20200511</font></a></td>
                         </tr>
                     </table>
                 </center>
