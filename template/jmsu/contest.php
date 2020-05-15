@@ -86,7 +86,7 @@
                         <th style="cursor:pointer"
                             onclick="sortTable('problemset', 1, 'int');"><?php echo $MSG_PROBLEM_ID ?></th>
                         <th><?php echo $MSG_TITLE ?></th>
-                        <th><?php echo $MSG_SOURCE ?></th>
+                        <!--                        <th>--><?php //echo $MSG_SOURCE ?><!--</th>-->
                         <th style="cursor:pointer"
                             onclick="sortTable('problemset', 4, 'int');"><?php echo $MSG_AC ?></th>
                         <th style="cursor:pointer"
