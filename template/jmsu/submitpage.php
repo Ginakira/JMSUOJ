@@ -366,7 +366,7 @@ for ($i = 0; $i < $lang_count; $i++) {
         ace.require("ace/ext/language_tools");
         var editor = ace.edit("source");
         editor.setTheme("ace/theme/chrome");
-        switchLang(<?php echo isset($lastlang) ? $lastlang : 0;  ?>);
+        switchLang(<?php echo isset($lastlang) ? $lastlang : 1;  ?>);
         editor.setOptions({
             enableBasicAutocompletion: true,
             enableSnippets: true,
