@@ -27,7 +27,7 @@
         <!-- Main component for a primary marketing message or call to action -->
         <div class="row mb-2 align-items-center">
             <div class="col text-center">
-                <h3>Contest<?php echo $view_cid ?> - <?php echo $view_title ?></h3>
+                <h3>Contest<?php echo $view_cid ?> <br> <?php echo $view_title ?></h3>
                 <p class='text-muted'><?php echo $view_description ?></p>
             </div>
             <div class="col text-center">
