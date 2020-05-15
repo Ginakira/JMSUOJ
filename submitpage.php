@@ -88,7 +88,7 @@ if (isset($sample_sql)) {
     $problem_id = $row[2];
 }
 
-$lastlang = 0;
+$lastlang = 1;
 if (!$view_src) {
     if (isset($_COOKIE['lastlang'])) {
         $lastlang = intval($_COOKIE['lastlang']);
