@@ -62,10 +62,10 @@
                     <thead>
                     <tr class=toprow align=center>
                         <td width=10%>ID
-                        <td width=50%>Name
-                        <td width=30%>Status
-                        <td width=10%>Private
-                        <td>Creator
+                        <td width=30%>名称
+                        <td width=40%>状态
+                        <td width=10%>类型
+                        <td width=10%>发起者
                     </tr>
                     </thead>
                     <tbody align='center'>
