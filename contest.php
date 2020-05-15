@@ -147,14 +147,14 @@ if (isset($_GET['cid'])) {
         }
         $view_problemset[$cnt][1] .= "Problem &nbsp;<span class='badge badge-secondary'>" . $PID[$cnt] . "</span>";
         $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>" . $row['title'] . "</a>";
-        $view_problemset[$cnt][3] = $row['source'];
+        // $view_problemset[$cnt][3] = $row['source']; 2020-05-15 比赛不显示标签
         if (!$noip) {
-            $view_problemset[$cnt][4] = "<span class='badge badge-success'>" . $row['accepted'] . "</span>";
+            $view_problemset[$cnt][3] = "<span class='badge badge-success'>" . $row['accepted'] . "</span>";
         } else {
-            $view_problemset[$cnt][4] = "";
+            $view_problemset[$cnt][3] = "";
         }
 
-        $view_problemset[$cnt][5] = "<span class='badge badge-info'>" . $row['submit'] . "</span>";
+        $view_problemset[$cnt][4] = "<span class='badge badge-info'>" . $row['submit'] . "</span>";
         $cnt++;
     }
 } else {
