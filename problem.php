@@ -109,7 +109,7 @@ if (count($result) != 1) {
         $result = pdo_query($sql, $id);
 
         if ($i = count($result)) {
-            $view_errors .= "This problem is in Contest(s) below:<br>";
+            $view_errors .= "题目暂不可用！本题目为以下比赛用题：<br>";
             foreach ($result as $row) {
                 $view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:" . htmlentities($row[1], ENT_QUOTES, "utf-8") . "</a><br>";
             }
