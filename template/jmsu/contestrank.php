@@ -72,11 +72,17 @@
                             else
                                 echo "*";
                             $usolved = $U[$i]->solved;
+                            // AK 图标
+                            $all_kill = "";
+                            if ($usolved == $pid_cnt) {
+                                $all_kill = "<span class='badge badge-danger'>AK</span>";
+                            }
+
                             if (isset($_GET['user_id']) && $uuid == $_GET['user_id']) echo "<td bgcolor=#ffff77>";
                             else echo "<td>";
                             echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
                             echo "<td><a href=userinfo.php?user=$uuid>" . htmlentities($U[$i]->nick, ENT_QUOTES, "UTF-8") . "</a>";
-                            echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
+                            echo "<td><a href=status.php?user_id=$uuid&cid=$cid>" . ($all_kill == "" ? $usolved : $all_kill) . "</a>";
                             echo "<td>" . sec2str($U[$i]->time);
                             for ($j = 0; $j < $pid_cnt; $j++) {
                                 $bg_color = "eeeeee";
