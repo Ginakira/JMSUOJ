@@ -49,7 +49,7 @@
 
         <div class="row">
             <div class="col" style="overflow: auto">
-                <table id=rank class="table table-sm text-center">
+                <table id=rank class="table table-striped table-sm text-center">
                     <thead class="thead-light">
                     <tr class=toprow>
                         <th class="{sorter:'false'}">名次</th>
@@ -62,15 +62,22 @@
                             echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></th>";
                         echo "</tr></thead>\n<tbody>";
                         for ($i = 0; $i < $user_cnt; $i++) {
-                            if ($i & 1) echo "<tr class=oddrow>\n";
-                            else echo "<tr class=evenrow>\n";
+                            echo "<tr>";
                             echo "<td>";
                             $uuid = $U[$i]->user_id;
                             $nick = $U[$i]->nick;
-                            if ($nick[0] != "*")
-                                echo $rank++;
-                            else
+                            if ($nick[0] != "*") {
+                                // 使用badge展示名次
+                                if ($rank <= 3) {
+                                    echo "<span class='badge badge-warning'>$rank</span>";
+                                } else {
+                                    echo "<span class='badge badge-light'>$rank</span>";
+                                }
+                                $rank++;
+                            } else {
                                 echo "*";
+                            }
+                            echo "</td>";
                             $usolved = $U[$i]->solved;
                             // AK 图标
                             $all_kill = "";
