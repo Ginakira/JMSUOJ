@@ -132,8 +132,10 @@
                     <table width=100% border=0>
                         <tr>
                             <td align=right width=65%>
-                                <a href="https://github.com/Ginakira/JMSUOJ"><font
-                                            color=red><?php echo $OJ_NAME ?></font></a></td>
+                                <a href="https://github.com/Ginakira/JMSUOJ">
+                                    <font color=red><?php echo $OJ_NAME ?></font>
+                                </a>
+                            </td>
                         </tr>
                     </table>
                 </center>
