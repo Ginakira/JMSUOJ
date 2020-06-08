@@ -36,7 +36,7 @@ if (!$result) {
             "<td><span class='badge badge-success'>" . $row['user_id'] . "</span></td></tr>";
         $news_modals .= "<div class='modal fade' id='news" . $cnt_id . "'>"; //模态框id
         //模态框头部&标题
-        $news_modals .= "<div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>" . $row['title'] . "</h4>-<small>" . $row['user_id'] . "</small><button type='button' class='close' data-dismiss='modal'>&times;</button></div>";
+        $news_modals .= "<div class='modal-dialog modal-dialog-scrollable modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>" . $row['title'] . "</h4>-<small>" . $row['user_id'] . "</small><button type='button' class='close' data-dismiss='modal'>&times;</button></div>";
         //模态框主体
         $news_modals .= "<div class='modal-body'>" . $row['content'] . "</div>";
         //模态框底部
